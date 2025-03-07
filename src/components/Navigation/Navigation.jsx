@@ -8,7 +8,7 @@ const Navigation = () => {
         <NavLink to="/" className={css.buildLinkClass}>
           Home
         </NavLink>
-        <NavLink to="/tutorials" className={css.buildLinkClass}>
+        <NavLink to="/help" className={css.buildLinkClass}>
           Help Page
         </NavLink>
       </nav>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { register, logIn, logOut, refreshUser } from "./operations";
+import { register, logIn, logOut, refreshUser } from "./operations";
 
 const slice = createSlice({
   name: "auth",
@@ -9,7 +9,7 @@ const slice = createSlice({
       email: null,
     },
     token: null,
-    isLoggedIn: false,
+    isLoggedIn: true,
     isRefreshing: false,
     isAdmin: false,
   },
