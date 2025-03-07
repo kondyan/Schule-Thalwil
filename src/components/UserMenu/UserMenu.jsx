@@ -5,16 +5,16 @@ import css from "./UserMenu.module.css";
 
 // MUI IMPORTS
 
-import MenuIcon from "@mui/icons-material/Menu";
-import {
-  Box,
-  IconButton,
-  Avatar,
-  Tooltip,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+// import MenuIcon from "@mui/icons-material/Menu";
+// import {
+//   Box,
+//   IconButton,
+//   Avatar,
+//   Tooltip,
+//   Menu,
+//   MenuItem,
+//   Typography,
+// } from "@mui/material";
 
 const UserMenu = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const UserMenu = () => {
 
   return (
     <div className={css.wrapper}>
-      <Box sx={{ flexGrow: 0 }}>
+      {/* <Box sx={{ flexGrow: 0 }}>
         <Tooltip title="Open settings">
           <IconButton sx={{ p: 0 }}>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -55,7 +55,7 @@ const UserMenu = () => {
             </MenuItem>
           ))}
         </Menu>
-      </Box>
+      </Box> */}
     </div>
   );
 };
