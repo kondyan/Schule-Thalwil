@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import { selectIsLoading, selectPosts } from "../../redux/articles/selectors";
 import Article from "../Article/Article";
 import css from "./ArticlesList.module.css";

@@ -1,35 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import {
   selectIsLoading,
   selectCategories,
 } from "../../redux/categories/selectors";
 import css from "./CategoriesList.module.css";
+import { getCategories } from "../../redux/categories/operations";
+import Category from "../Category/Category";
 
-const TutorialsList = () => {
+const CategoriesList = () => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    dispatch();
-    console.log("useEffect tutorials list");
+    dispatch(getCategories());
+    console.log("useEffect categories list");
   }, [dispatch]);
   return (
     <ul>
       {!isLoading &&
         categories?.map((category) => (
-          <Article
-            key={tutorial._id}
-            title={post.title}
-            imageUrl={post.imageUrl}
-            content={post.content}
-            author={post.author}
-          />
+          <Category key={category._id} name={category.name} />
         ))}
     </ul>
   );
 };
 
-export default TutorialsList;
+export default CategoriesList;
