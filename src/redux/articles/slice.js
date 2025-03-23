@@ -8,6 +8,7 @@ const slice = createSlice({
     totalPages: undefined,
     limit: 10,
     data: [],
+    currentPost: undefined,
     isRefreshing: false,
     error: undefined,
   },

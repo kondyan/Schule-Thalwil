@@ -14,7 +14,6 @@ const CategoriesList = () => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
   const isLoading = useSelector(selectIsLoading);
-  const activeCategory = useSelector(selectActiveCategory);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +28,7 @@ const CategoriesList = () => {
             key={category._id}
             name={category.name}
             onClick={() => {
-              navigate(activeCategory);
+              navigate(category._id);
               // dispatch(getTutorials(category._id));
             }}
           />

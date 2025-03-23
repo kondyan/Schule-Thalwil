@@ -15,8 +15,6 @@ const TutorialsList = () => {
     dispatch(getTutorials(category));
   }, [dispatch, category]);
 
-  console.log(tutorials);
-
   return (
     <ul>
       {tutorials.map((tutorial) => (

@@ -1,0 +1,17 @@
+.img {
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+}
+
+.openBtn {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: black;
+}
+
+.openBtn:hover,
+.openBtn:focus {
+  color: #01a2d8;
+}
