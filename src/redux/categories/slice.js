@@ -1,11 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCategories } from "./operations";
+import { getCategories, getTutorials } from "./operations";
+
+const pending = (state) => {
+  state.isRefreshing = true;
+};
+
+const rejected = (state, action) => {
+  state.isRefreshing = false;
+  state.error = action.payload;
+};
 
 const slice = createSlice({
   name: "categories",
   initialState: {
     activeCategory: undefined,
-    data: [],
+    categories: [],
+    tutorials: [],
     isRefreshing: false,
     error: undefined,
   },
@@ -13,7 +23,7 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCategories.fulfilled, (state, action) => {
-        state.data = action.payload;
+        state.categories = action.payload;
         state.isRefreshing = false;
         state.error = undefined;
       })
@@ -21,6 +31,19 @@ const slice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(getCategories.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+      .addCase(getTutorials.fulfilled, (state, action) => {
+        state.tutorials = action.payload.data;
+        state.activeCategory = action.payload.activeCategory;
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+      .addCase(getTutorials.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(getTutorials.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
       });

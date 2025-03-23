@@ -23,3 +23,16 @@ export const getCategories = createAsyncThunk(
     }
   }
 );
+
+export const getTutorials = createAsyncThunk(
+  "categories/getTutorials",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(`/tutorials/${id}`);
+      response.data.activeCategory = id;
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

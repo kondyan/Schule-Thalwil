@@ -1,9 +1,11 @@
 import css from "./Category.module.css";
 
-const Category = ({ name }) => {
+const Category = ({ name, onClick }) => {
   return (
     <li>
-      <button className={css.button}>{name}</button>
+      <button className={css.button} onClick={onClick}>
+        {name}
+      </button>
     </li>
   );
 };
