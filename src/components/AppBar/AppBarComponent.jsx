@@ -13,17 +13,16 @@ const AppBarComponent = () => {
   return (
     <AppBar position="static" sx={{ backgroundColor: "#01A2D8" }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Navigation />
-            {isLoggedIn ? <UserMenu /> : <AuthNav />}
-          </Box>
+        <Toolbar
+          disableGutters
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <Navigation />
+          {isLoggedIn ? <UserMenu /> : <AuthNav />}
         </Toolbar>
       </Container>
     </AppBar>

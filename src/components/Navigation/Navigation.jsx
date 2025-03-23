@@ -12,20 +12,20 @@ const Navigation = () => {
         gap: "20px",
       }}
     >
-      <Button key="home" sx={{ my: 2, color: "white", display: "block" }}>
-        <Typography variant="button" component="p" fontSize="16px">
-          <NavLink to="/" className={css.buildLinkClass}>
+      <NavLink to="/">
+        <Button key="home" sx={{ my: 2, color: "white", display: "block" }}>
+          <Typography variant="button" component="p" fontSize="16px">
             Home
-          </NavLink>
-        </Typography>
-      </Button>
-      <Button key="help" sx={{ my: 2, color: "white", display: "block" }}>
-        <Typography variant="button" component="p" fontSize="16px">
-          <NavLink to="/help" className={css.buildLinkClass}>
+          </Typography>
+        </Button>
+      </NavLink>
+      <NavLink to="/help">
+        <Button key="help" sx={{ my: 2, color: "white", display: "block" }}>
+          <Typography variant="button" component="p" fontSize="16px">
             Help Page
-          </NavLink>
-        </Typography>
-      </Button>
+          </Typography>
+        </Button>
+      </NavLink>
     </Box>
   );
 };
