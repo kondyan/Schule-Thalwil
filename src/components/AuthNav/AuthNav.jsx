@@ -1,16 +1,32 @@
 import { NavLink } from "react-router";
 import css from "./AuthNav.module.css";
+import { Box, Button, Typography } from "@mui/material";
 
 const AuthNav = () => {
   return (
-    <div className={css.wrapper}>
+    <Box
+      sx={{
+        display: "flex",
+        gap: "20",
+        paddingTop: "5",
+        paddingRight: "10",
+      }}
+    >
       <NavLink className={css.link} to="/register">
-        Register
+        <Button key="home" sx={{ my: 2, color: "white", display: "block" }}>
+          <Typography variant="overline" component="p" fontSize="16px">
+            Registrieren
+          </Typography>
+        </Button>
       </NavLink>
       <NavLink className={css.link} to="/login">
-        Log In
+        <Button key="home" sx={{ my: 2, color: "white", display: "block" }}>
+          <Typography variant="overline" component="p" fontSize="16px">
+            Einloggen
+          </Typography>
+        </Button>
       </NavLink>
-    </div>
+    </Box>
   );
 };
 
