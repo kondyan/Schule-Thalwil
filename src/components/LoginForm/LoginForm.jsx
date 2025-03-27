@@ -34,8 +34,7 @@ const LoginForm = () => {
       elevation={10}
       sx={{
         padding: "50px",
-        height: "47vh",
-        width: "300px",
+        width: "50%",
         margin: "100px auto",
       }}
     >

@@ -13,27 +13,31 @@ const AppBarComponent = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#01A2D8" }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Grid
-            container
-            sx={{
-              width: "100%",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Grid size={3}>
-              <Logo />
-            </Grid>
-            <Grid size={3}>
-              <Navigation />
-            </Grid>
-            <Grid size={3}>{isLoggedIn ? <UserMenu /> : <AuthNav />}</Grid>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "#01A2D8", height: "80px" }}
+    >
+      <Toolbar disableGutters>
+        <Grid
+          container
+          sx={{
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: "80px",
+            paddingLeft: "20px",
+            paddingRight: "20px",
+          }}
+        >
+          <Grid size={3}>
+            <Logo />
           </Grid>
-        </Toolbar>
-      </Container>
+          <Grid size={3}>
+            <Navigation />
+          </Grid>
+          <Grid size={3}>{isLoggedIn ? <UserMenu /> : <AuthNav />}</Grid>
+        </Grid>
+      </Toolbar>
     </AppBar>
   );
 };

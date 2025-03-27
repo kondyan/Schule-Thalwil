@@ -37,8 +37,8 @@ const RegisterForm = () => {
       elevation={10}
       sx={{
         padding: "50px",
-        height: "53vh",
-        width: "500px",
+
+        width: "50%",
         margin: "100px auto",
       }}
     >
@@ -63,11 +63,7 @@ const RegisterForm = () => {
             Registrieren
           </Typography>
         </Grid>
-        <form
-          className={css.loginForm}
-          onSubmit={handleSubmit}
-          autoComplete="off"
-        >
+        <form onSubmit={handleSubmit} autoComplete="off">
           <Grid
             container
             sx={{

@@ -13,7 +13,10 @@ const AuthNav = () => {
       }}
     >
       <NavLink className={css.link} to="/register">
-        <Button key="home" sx={{ my: 2, color: "white", display: "block" }}>
+        <Button
+          key="home"
+          sx={{ my: 2, color: "white", display: "block", height: "40px" }}
+        >
           <Typography variant="overline" component="p" fontSize="16px">
             Registrieren
           </Typography>
