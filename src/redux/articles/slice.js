@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getPosts } from "./operations";
+import { getPostById, getPosts } from "./operations";
 
 const slice = createSlice({
   name: "posts",
@@ -8,7 +8,11 @@ const slice = createSlice({
     totalPages: undefined,
     limit: 10,
     data: [],
-    currentPost: undefined,
+    currentPost: {
+      data: {},
+      isRefreshing: false,
+      error: undefined,
+    },
     isRefreshing: false,
     error: undefined,
   },
@@ -28,6 +32,18 @@ const slice = createSlice({
       .addCase(getPosts.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
+      })
+      .addCase(getPostById.fulfilled, (state, action) => {
+        state.currentPost.data = action.payload;
+        state.currentPost.isRefreshing = false;
+        state.currentPost.error = undefined;
+      })
+      .addCase(getPostById.pending, (state) => {
+        state.currentPost.isRefreshing = true;
+      })
+      .addCase(getPostById.rejected, (state, action) => {
+        state.currentPost.isRefreshing = false;
+        state.currentPost.error = action.payload;
       });
   },
 });

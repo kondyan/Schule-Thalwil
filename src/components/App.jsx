@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "../redux/auth/selectors";
 import { refreshUser } from "../redux/auth/operations";
 import TutorialsList from "./TutorialsList/TutorialsList";
+import ArticlePage from "../pages/ArticlePage/ArticlePage";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const HelpPage = lazy(() => import("../pages/HelpPage/HelpPage"));
@@ -29,6 +30,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
+        <Route path="/posts/:id" element={<ArticlePage />} />
         <Route path="/help" element={<HelpPage />}>
           <Route path="/help/:category" element={<TutorialsList />} />
         </Route>
@@ -48,6 +50,7 @@ const App = () => {
             <PrivateRoute redirectTo="login" component={<ProfilePage />} />
           }
         />
+
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

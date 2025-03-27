@@ -7,6 +7,7 @@ import AuthNav from "../AuthNav/AuthNav";
 import css from "./AppBarComponent.module.css";
 import { Container, Toolbar, AppBar, Box } from "@mui/material";
 import Logo from "../Logo/Logo";
+import Grid from "@mui/material/Grid2";
 
 const AppBarComponent = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -14,17 +15,23 @@ const AppBarComponent = () => {
   return (
     <AppBar position="static" sx={{ backgroundColor: "#01A2D8" }}>
       <Container maxWidth="xl">
-        <Toolbar
-          disableGutters
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Logo />
-          <Navigation />
-          {isLoggedIn ? <UserMenu /> : <AuthNav />}
+        <Toolbar disableGutters>
+          <Grid
+            container
+            sx={{
+              width: "100%",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Grid size={3}>
+              <Logo />
+            </Grid>
+            <Grid size={3}>
+              <Navigation />
+            </Grid>
+            <Grid size={3}>{isLoggedIn ? <UserMenu /> : <AuthNav />}</Grid>
+          </Grid>
         </Toolbar>
       </Container>
     </AppBar>

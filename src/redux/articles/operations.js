@@ -20,3 +20,16 @@ export const getPosts = createAsyncThunk("posts/get", async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const getPostById = createAsyncThunk(
+  "posts/getPostById",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(`/posts/${id}`);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

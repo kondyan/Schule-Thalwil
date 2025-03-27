@@ -7,7 +7,7 @@ const AuthNav = () => {
     <Box
       sx={{
         display: "flex",
-        gap: "20",
+        gap: "20px",
         paddingTop: "5",
         paddingRight: "10",
       }}
@@ -22,7 +22,7 @@ const AuthNav = () => {
       <NavLink className={css.link} to="/login">
         <Button key="home" sx={{ my: 2, color: "white", display: "block" }}>
           <Typography variant="overline" component="p" fontSize="16px">
-            Einloggen
+            Anmelden
           </Typography>
         </Button>
       </NavLink>

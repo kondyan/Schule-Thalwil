@@ -1,3 +1,8 @@
 export const selectPosts = (state) => state.posts.data;
 
-export const selectIsLoading = (state) => state.posts.isLoading;
+export const selectIsRefreshing = (state) => state.posts.isRefreshing;
+
+export const selectCurrentPost = (state) => state.posts.currentPost.data;
+
+export const selectCurrentPostIsRefreshing = (state) =>
+  state.posts.currentPost.isRefreshing;
