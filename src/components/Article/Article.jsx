@@ -80,7 +80,7 @@ const Article = ({ id, title, imageUrl, content, author }) => {
               </Box>
 
               <Typography variant="button" component="div">
-                <Link className={css.openBtn} to={id}>
+                <Link className={css.openBtn} to={`posts/${id}`}>
                   Öffnen
                   <Launch />
                 </Link>

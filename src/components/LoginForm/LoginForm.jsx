@@ -25,8 +25,6 @@ const theme = createTheme({
   },
 });
 
-const providers = [{ id: "credentials", name: "Email and Password" }];
-
 const LoginForm = () => {
   const dispatch = useDispatch();
 
@@ -34,7 +32,6 @@ const LoginForm = () => {
     e.preventDefault();
     const form = e.target;
 
-    const { email, password } = formData;
     dispatch(
       logIn({
         email: form.elements.email.value,

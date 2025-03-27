@@ -9,10 +9,10 @@ const HomePage = () => {
     <>
       <DocumentTitle>Home</DocumentTitle>
 
+      <Hero />
       <Box>
         <h1 className={css.title}>Schule Thalwil</h1>
 
-        <Hero />
         <ArticlesList />
       </Box>
     </>
