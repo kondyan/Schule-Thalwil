@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import css from "./ArticlePageComponent.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,30 +22,48 @@ const ArticlePageComponent = () => {
 
   const { _id, title, imageUrl, content, author } = post;
   return (
-    <Box>
-      <Grid
-        container
-        direction="column"
-        sx={{
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {!isRefreshing && (
-          <>
-            <Grid>
-              <Typography>{title}</Typography>
-            </Grid>
-            <Grid>
-              <Box>
-                <img src={imageUrl} alt={title} />
-              </Box>
-            </Grid>
-            <Grid></Grid>
-            <Grid></Grid>
-          </>
-        )}
-      </Grid>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        my: "30px",
+      }}
+    >
+      {!isRefreshing && (
+        <Box>
+          <Typography variant="h2" component="h1" sx={{ fontWeight: "500" }}>
+            {title}
+          </Typography>
+
+          <Box>
+            <img src={imageUrl} alt={title} width={500} />
+          </Box>
+          <Typography variant="h6" component="h2" sx={{ fontWeight: "550" }}>
+            Beschreibung:
+          </Typography>
+          <Typography
+            variant="paragraph"
+            component="p"
+            sx={{ width: "1200px" }}
+          >
+            {content}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
+              mt: "10px",
+            }}
+          >
+            <Avatar>{author.avatar}</Avatar>
+            <Typography>
+              {author.name} {author.secondName}
+            </Typography>
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 };
