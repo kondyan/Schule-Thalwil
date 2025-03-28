@@ -30,9 +30,9 @@ const UserMenu = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title="Open settings">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+    <Box sx={{ flexGrow: 0, ml: { xs: "23.5%", md: "13.5%" } }}>
+      <Tooltip title="Einstellungen">
+        <IconButton onClick={handleOpenUserMenu} sx={{ p: { md: 2 } }}>
           <Avatar alt={user.username} src={user.avatar} />
         </IconButton>
       </Tooltip>

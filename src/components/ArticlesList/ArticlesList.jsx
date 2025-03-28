@@ -25,9 +25,8 @@ const ArticlesList = () => {
         display="flex"
         alignItems="flex-start"
         justifyContent={{
-          mobile: "center",
-          tablet: "flex-start",
-          desktop: "flex-start",
+          xs: "center",
+          md: "flex-start",
         }}
       >
         {!isRefreshing &&

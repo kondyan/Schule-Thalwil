@@ -10,10 +10,7 @@ import { Launch } from "@mui/icons-material";
 const Article = ({ id, title, imageUrl, content, author }) => {
   return (
     <li>
-      <Grid
-        xs={{ mobile: 12, tablet: 6, desktop: 3 }}
-        width={{ mobile: 410, tablet: 400, desktop: 360 }}
-      >
+      <Grid sx={{ xs: 12, md: 6, lg: 3 }} width={{ xs: 350, md: 400, lg: 350 }}>
         <Paper
           square={false}
           elevation={6}
@@ -62,8 +59,12 @@ const Article = ({ id, title, imageUrl, content, author }) => {
               }}
             >
               <Avatar src={author.avatar} alt={author.username} />
-              <Typography variant="subtitle2" component="span">
-                {author.username}
+              <Typography
+                overflow="hidden"
+                variant="subtitle2"
+                component="span"
+              >
+                {author.name} {author.secondName}
               </Typography>
             </Box>
 

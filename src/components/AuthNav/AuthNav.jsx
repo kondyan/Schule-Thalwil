@@ -6,25 +6,20 @@ const AuthNav = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        gap: "20px",
-        paddingTop: "5",
-        paddingRight: "10",
+        display: { xs: "none", md: "flex" },
+        gap: "10px",
       }}
     >
       <NavLink className={css.link} to="/register">
-        <Button
-          key="home"
-          sx={{ my: 2, color: "white", display: "block", height: "40px" }}
-        >
-          <Typography variant="overline" component="p" fontSize="16px">
+        <Button key="home" sx={{ my: 2, color: "white", display: "block" }}>
+          <Typography variant="button" component="p" fontSize="16px">
             Registrieren
           </Typography>
         </Button>
       </NavLink>
       <NavLink className={css.link} to="/login">
         <Button key="home" sx={{ my: 2, color: "white", display: "block" }}>
-          <Typography variant="overline" component="p" fontSize="16px">
+          <Typography variant="button" component="p" fontSize="16px">
             Anmelden
           </Typography>
         </Button>

@@ -21,13 +21,6 @@ const theme = createTheme({
     },
     secondary: { main: "#ffffff" },
   },
-  breakpoints: {
-    values: {
-      mobile: 0,
-      tablet: 900,
-      desktop: 1200,
-    },
-  },
 });
 
 createRoot(document.getElementById("root")).render(
