@@ -5,7 +5,6 @@ import {
   selectPosts,
 } from "../../redux/articles/selectors";
 import Article from "../Article/Article";
-import css from "./ArticlesList.module.css";
 import { getPosts } from "../../redux/articles/operations";
 import Grid from "@mui/material/Grid2";
 

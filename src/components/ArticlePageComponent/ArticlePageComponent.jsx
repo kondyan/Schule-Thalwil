@@ -57,10 +57,14 @@ const ArticlePageComponent = () => {
               mt: "10px",
             }}
           >
-            <Avatar>{author.avatar}</Avatar>
-            <Typography>
-              {author.name} {author.secondName}
-            </Typography>
+            {author && (
+              <>
+                <Avatar>{author.avatar}</Avatar>
+                <Typography>
+                  {author.name} {author.secondName}
+                </Typography>
+              </>
+            )}
           </Box>
         </Box>
       )}

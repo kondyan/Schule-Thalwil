@@ -27,13 +27,15 @@ const Navigation = () => {
       <Typography
         sx={{
           display: { xs: "none", md: "flex" },
-          mr: "90px",
+          pr: { md: "128.2px" },
         }}
       >
         <img src={logo} width={130} className={css.logo} alt="Schule Thalwil" />
       </Typography>
 
-      <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+      <Box
+        sx={{ flexGrow: !isLoggedIn && 1, display: { xs: "flex", md: "none" } }}
+      >
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -98,7 +100,7 @@ const Navigation = () => {
                   textAlign="center"
                   fontSize="14px"
                 >
-                  Help
+                  Tutorials
                 </Typography>
               </Button>
             </NavLink>
@@ -217,7 +219,7 @@ const Navigation = () => {
         sx={{
           flexGrow: 1,
           display: { xs: "none", md: "flex" },
-          gap: "30px",
+          gap: "20px",
           justifyContent: "center",
         }}
       >

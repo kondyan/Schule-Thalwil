@@ -30,9 +30,16 @@ const UserMenu = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 0, ml: { xs: "23.5%", md: "13.5%" } }}>
+    <Box
+      sx={{
+        flexGrow: 0,
+      }}
+    >
       <Tooltip title="Einstellungen">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: { md: 2 } }}>
+        <IconButton
+          onClick={handleOpenUserMenu}
+          sx={{ p: { md: 2 }, pl: { md: "45px" }, pr: { md: "45px" } }}
+        >
           <Avatar alt={user.username} src={user.avatar} />
         </IconButton>
       </Tooltip>
@@ -42,12 +49,12 @@ const UserMenu = () => {
         anchorEl={anchorElUser}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "right",
+          horizontal: "left",
         }}
         keepMounted
         transformOrigin={{
           vertical: "top",
-          horizontal: "right",
+          horizontal: "left",
         }}
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
