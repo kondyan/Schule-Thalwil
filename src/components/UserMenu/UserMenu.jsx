@@ -38,7 +38,7 @@ const UserMenu = () => {
       <Tooltip title="Einstellungen">
         <IconButton
           onClick={handleOpenUserMenu}
-          sx={{ p: { md: 2 }, pl: { md: "45px" }, pr: { md: "45px" } }}
+          sx={{ p: { md: 2 }, mx: { md: "90px" } }}
         >
           <Avatar alt={user.username} src={user.avatar} />
         </IconButton>
@@ -54,7 +54,7 @@ const UserMenu = () => {
         keepMounted
         transformOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "center",
         }}
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
