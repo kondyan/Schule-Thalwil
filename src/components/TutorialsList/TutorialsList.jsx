@@ -10,10 +10,7 @@ import { Typography } from "@mui/material";
 const TutorialsList = () => {
   const dispatch = useDispatch();
   const tutorials = useSelector(selectTutorials);
-
   const { category } = useParams();
-
-  console.log(tutorials);
 
   useEffect(() => {
     dispatch(getTutorials(category));

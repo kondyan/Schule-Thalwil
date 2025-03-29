@@ -22,13 +22,16 @@ const ArticlePageComponent = () => {
 
   const { _id, title, imageUrl, content, author, updatedAt } = post;
 
-  const publishDate = updatedAt
-    .split("T", 1)
-    .toString()
-    .split("-")
-    .reverse()
-    .toString()
-    .replaceAll(",", ".");
+  let publishDate;
+  if (updatedAt) {
+    publishDate = updatedAt
+      .split("T", 1)
+      .toString()
+      .split("-")
+      .reverse()
+      .toString()
+      .replaceAll(",", ".");
+  }
 
   return (
     <Paper
@@ -46,7 +49,7 @@ const ArticlePageComponent = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              pl: { xs: "5px", md: "15px", lg: "20px" },
+              px: { xs: "5px", md: "15px", lg: "20px" },
             }}
           >
             <Typography
@@ -74,6 +77,7 @@ const ArticlePageComponent = () => {
               variant="h6"
               component="h2"
               sx={{
+                pt: "10px",
                 fontWeight: "600",
                 fontSize: { xs: "32px", md: "42px", lg: "54px" },
               }}
@@ -87,7 +91,7 @@ const ArticlePageComponent = () => {
               sx={{
                 width: { xs: "350px", md: "600px", lg: "1000px" },
                 px: { xs: "50px", md: "80px", lg: "100px" },
-                py: { xs: "20px", md: "30px", lg: "35px" },
+                py: { xs: "15px", md: "20px", lg: "30px" },
                 fontSize: { xs: "16px", md: "24px", lg: "32px" },
                 fontWeight: "400",
               }}
@@ -114,9 +118,12 @@ const ArticlePageComponent = () => {
                   pl: { xs: "10px", md: "15px", lg: "25px" },
                 }}
               >
-                <Avatar sx={{ scale: { xs: "1", md: "1.3", lg: "1.5" } }}>
-                  {author.avatar}
-                </Avatar>
+                <Avatar
+                  src={author.avatar}
+                  alt={author.name}
+                  sx={{ scale: { xs: "1", md: "1.3", lg: "1.5" } }}
+                />
+
                 <Typography
                   variant="subtitle2"
                   component="span"
@@ -151,6 +158,7 @@ const ArticlePageComponent = () => {
                 component="span"
                 sx={{
                   fontSize: { xs: "12px", md: "16px", lg: "24px" },
+                  fontWeight: "350",
                   pt: "2px",
                 }}
               >

@@ -30,7 +30,7 @@ const CategoriesList = () => {
           flexDirection: { xs: "column", md: "row" },
           justifyContent: "center",
           flexWrap: "wrap",
-          my: "90px",
+          my: { xs: "60px", md: "80px", lg: "110px" },
         }}
       >
         {!isLoading &&

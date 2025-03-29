@@ -5,7 +5,7 @@ import { Box, Paper, Typography } from "@mui/material";
 const Tutorial = ({ title, description, videoUrl }) => {
   return (
     <li>
-      <Grid sx={{ xs: 12, md: 6 }} width={{ xs: 350, md: 500, lg: 550 }}>
+      <Grid sx={{ xs: 12, md: 6 }} width={{ xs: 350, md: 600, lg: 540 }}>
         <Paper
           square={false}
           elevation={6}
