@@ -87,7 +87,7 @@ const ArticlePageComponent = () => {
             <Typography
               variant="paragraph"
               component="p"
-              align="center"
+              align="left"
               sx={{
                 width: { xs: "350px", md: "600px", lg: "1000px" },
                 px: { xs: "50px", md: "80px", lg: "100px" },

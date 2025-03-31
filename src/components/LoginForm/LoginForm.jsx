@@ -1,8 +1,14 @@
 import { useDispatch } from "react-redux";
 import css from "./LoginForm.module.css";
 import { logIn } from "../../redux/auth/operations";
-import { Avatar, Button, Paper, TextField, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import {
+  Avatar,
+  Button,
+  Paper,
+  TextField,
+  Typography,
+  Box,
+} from "@mui/material";
 import PasswordIcon from "@mui/icons-material/Password";
 import { Link } from "react-router";
 
@@ -33,109 +39,119 @@ const LoginForm = () => {
     <Paper
       elevation={10}
       sx={{
-        padding: "50px",
-        width: "50%",
+        width: { xs: "320px", md: "500px", lg: "650px" },
+        padding: { xs: "30px", md: "40px", lg: "50px" },
+
         margin: "100px auto",
       }}
     >
-      <Grid
-        container
-        spacing={1.5}
-        direction="column"
+      <Box
         sx={{
+          display: "flex",
           width: "100%",
           justifyContent: "center",
           alignItems: "center",
+          flexDirection: "column",
+          gap: { xs: "5px", md: "10px", lg: "15px" },
         }}
       >
-        <Grid>
-          <Avatar sx={{ backgroundColor: "#01A2D8" }}>
-            <PasswordIcon />
-          </Avatar>
-        </Grid>
+        <Avatar
+          sx={{
+            backgroundColor: "#01A2D8",
+            scale: { xs: "1", md: "1.2", lg: "1.4" },
+          }}
+        >
+          <PasswordIcon />
+        </Avatar>
 
-        <Grid>
-          <Typography variant="h6" component="p">
-            Anmelden
-          </Typography>
-        </Grid>
+        <Typography
+          variant="h6"
+          component="p"
+          sx={{ fontSize: { xs: "16px", md: "24px", lg: "36px" } }}
+        >
+          Anmelden
+        </Typography>
+
         <form
           className={css.loginForm}
           onSubmit={handleSubmit}
           autoComplete="off"
         >
-          <Grid
-            container
-            spacing={4}
-            direction="column"
+          <Box
             sx={{
-              width: "100%",
+              display: "flex",
+              width: { xs: "280px", md: "320px", lg: "350px" },
               justifyContent: "center",
               alignItems: "center",
+              flexDirection: "column",
+              gap: { xs: "20px", md: "30px", lg: "40px" },
             }}
           >
-            <Grid>
-              <TextField
-                sx={{ color: "#01A2D8" }}
-                fullWidth
-                required
-                variant="standard"
-                label="E-mail"
-                type="email"
-                name="email"
-                placeholder="E-mail"
-              />
-            </Grid>
-
-            <Grid>
-              <TextField
-                color="primary"
-                fullWidth
-                required
-                variant="standard"
-                label="Passwort"
-                type="password"
-                name="password"
-                placeholder="Passwort"
-              />
-            </Grid>
-
-            <Grid size={12} textAlign="center">
-              <Button
-                sx={{ color: "#ffffff" }}
-                size="large"
-                type="submit"
-                variant="contained"
-              >
-                Anmelden
-              </Button>
-            </Grid>
-            <Grid
-              container
-              spacing={0.5}
-              direction="column"
+            <TextField
               sx={{
+                scale: { xs: "1", md: "1.2", lg: "1.4" },
+              }}
+              fullWidth
+              required
+              variant="standard"
+              label="E-mail"
+              type="email"
+              name="email"
+              placeholder="E-mail"
+            />
+
+            <TextField
+              sx={{
+                scale: { xs: "1", md: "1.2", lg: "1.4" },
+              }}
+              color="primary"
+              fullWidth
+              required
+              variant="standard"
+              label="Passwort"
+              type="password"
+              name="password"
+              placeholder="Passwort"
+            />
+
+            <Button
+              sx={{
+                color: "#ffffff",
+                mt: { xs: "5px", md: "15px", lg: "25px" },
+                scale: { xs: "1", md: "1.2", lg: "1.4" },
+              }}
+              size="large"
+              type="submit"
+              variant="contained"
+            >
+              Anmelden
+            </Button>
+
+            <Box
+              sx={{
+                display: "flex",
                 width: "100%",
+                flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                mt: { xs: "2px", md: "5px", lg: "15px" },
+                scale: { xs: "1", md: "1.2", lg: "1.4" },
+                gap: { xs: "5px", md: "7px", lg: "12px" },
               }}
             >
-              <Grid>
-                <Typography variant="subtitle1" component="p">
-                  Hast du noch kein Konto?
-                </Typography>
-              </Grid>
-              <Grid>
-                <Typography variant="button" component="div">
-                  <Link className={css.openBtn} to={"/register"}>
-                    Registrieren
-                  </Link>
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
+              <Typography variant="subtitle1" component="p">
+                Hast du noch kein Konto?
+              </Typography>
+
+              <Typography variant="button" component="div">
+                <Link className={css.openBtn} to={"/register"}>
+                  Registrieren
+                </Link>
+              </Typography>
+            </Box>
+          </Box>
         </form>
-      </Grid>
+      </Box>
     </Paper>
   );
 };
