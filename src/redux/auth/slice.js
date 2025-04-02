@@ -13,7 +13,7 @@ const slice = createSlice({
     },
     token: null,
     isLoggedIn: false,
-    isRefreshing: false,
+    isRefreshing: true,
     isAdmin: false,
     error: undefined,
   },

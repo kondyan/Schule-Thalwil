@@ -1,23 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
 import { logOut } from "../../redux/auth/operations";
-import css from "./UserMenu.module.css";
 import {
   Avatar,
   Box,
+  Button,
   IconButton,
   Menu,
-  MenuItem,
   Tooltip,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { NavLink } from "react-router";
 
 const UserMenu = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const navigate = useNavigate();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -59,23 +57,46 @@ const UserMenu = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem
-          key="Profile"
-          onClick={() => {
-            navigate("/profile");
-          }}
-        >
-          <Typography sx={{ textAlign: "center" }}>Profile</Typography>
-        </MenuItem>
+        <NavLink to="profile">
+          <Button
+            key="profile"
+            sx={{
+              color: "black",
+              display: "block",
+              mx: "auto",
+            }}
+          >
+            <Typography
+              variant="button"
+              component="p"
+              textAlign="center"
+              fontSize="14px"
+            >
+              Profil
+            </Typography>
+          </Button>
+        </NavLink>
 
-        <MenuItem
-          key="Logout"
+        <Button
+          key="logout"
           onClick={() => {
             dispatch(logOut());
           }}
+          sx={{
+            color: "black",
+            display: "block",
+            mx: "auto",
+          }}
         >
-          <Typography sx={{ textAlign: "center" }}>Logout</Typography>
-        </MenuItem>
+          <Typography
+            variant="button"
+            component="p"
+            textAlign="center"
+            fontSize="14px"
+          >
+            Ausloggen
+          </Typography>
+        </Button>
       </Menu>
     </Box>
   );

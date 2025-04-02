@@ -2,7 +2,7 @@ import ArticlesList from "../../components/ArticlesList/ArticlesList";
 import DocumentTitle from "../../components/DocumentTitle";
 import Hero from "../../components/Hero/Hero";
 import css from "./HomePage.module.css";
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 
 const HomePage = () => {
   return (
@@ -11,9 +11,7 @@ const HomePage = () => {
 
       <Hero />
       <Container fixed>
-        <Box>
-          <ArticlesList />
-        </Box>
+        <ArticlesList />
       </Container>
     </>
   );

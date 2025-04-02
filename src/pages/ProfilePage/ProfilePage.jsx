@@ -1,13 +1,15 @@
 import { Container } from "@mui/material";
-import css from "./ProfilePage.module.css";
 import DocumentTitle from "../../components/DocumentTitle";
+import Profile from "../../components/Profile/Profile";
+import css from "./ProfilePage.module.css";
 
 const ProfilePage = () => {
-  <Container fixed>
-    <DocumentTitle>Profil</DocumentTitle>
-
-    <h1>Profile Page</h1>
-  </Container>;
+  return (
+    <Container fixed>
+      <DocumentTitle>Profil</DocumentTitle>
+      <Profile />
+    </Container>
+  );
 };
 
 export default ProfilePage;

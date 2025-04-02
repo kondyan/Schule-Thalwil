@@ -43,6 +43,7 @@ const Navigation = () => {
           aria-haspopup="true"
           onClick={handleOpenNavMenu}
           color="inherit"
+          sx={{ scale: "1.2" }}
         >
           <MenuIcon color="secondary" />
         </IconButton>
