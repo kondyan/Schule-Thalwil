@@ -45,12 +45,6 @@ const slice = createSlice({
         state.isLoggedIn = false;
         state.error = undefined;
       })
-
-      .addCase(updateUserData.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isRefreshing = false;
-        state.error = undefined;
-      })
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
       })
@@ -73,6 +67,18 @@ const slice = createSlice({
       })
       .addCase(updateAvatar.fulfilled, (state, action) => {
         state.user.avatar = action.payload;
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+      .addCase(updateUserData.pending, (state, action) => {
+        state.isRefreshing = true;
+      })
+      .addCase(updateUserData.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+      .addCase(updateUserData.fulfilled, (state, action) => {
+        state.user = action.payload;
         state.isRefreshing = false;
         state.error = undefined;
       });
