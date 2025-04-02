@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "../redux/auth/selectors";
 import { refreshUser } from "../redux/auth/operations";
 import TutorialsList from "./TutorialsList/TutorialsList";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const HelpPage = lazy(() => import("../pages/HelpPage/HelpPage"));
@@ -25,7 +26,17 @@ const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b>Refreshing User...</b>
+    <Box
+      sx={{
+        mx: { xs: "45%", lg: "50%" },
+        mt: { xs: "200px", md: "350px", lg: "500px" },
+      }}
+    >
+      <CircularProgress
+        color="primary"
+        sx={{ scale: { xs: "1.2", md: "1.5", lg: "2" } }}
+      />
+    </Box>
   ) : (
     <Routes>
       <Route path="/" element={<Layout />}>
