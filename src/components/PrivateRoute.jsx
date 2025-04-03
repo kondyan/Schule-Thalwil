@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../redux/auth/selectors";
+import { selectIsLoggedIn, selectRoles } from "../redux/auth/selectors";
 import { Navigate } from "react-router";
 
 const PrivateRoute = ({
@@ -8,7 +8,7 @@ const PrivateRoute = ({
   roles = [],
 }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const roles = useSelector(selectRoles);
+  const userRoles = useSelector(selectRoles);
 
   if (!isLoggedIn) {
     return <Navigate to={redirectTo} />;
@@ -18,7 +18,7 @@ const PrivateRoute = ({
     return Component;
   }
 
-  const hasRole = roles.some((role) => roles.has(role));
+  const hasRole = roles.some((role) => userRoles.includes(role));
 
   return hasRole ? Component : <Navigate to={redirectTo} />;
 };

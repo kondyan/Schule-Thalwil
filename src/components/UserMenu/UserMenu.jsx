@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../redux/auth/selectors";
+import { selectRoles, selectUser } from "../../redux/auth/selectors";
 import { logOut } from "../../redux/auth/operations";
 import {
   Avatar,
@@ -16,6 +16,7 @@ import { NavLink } from "react-router";
 const UserMenu = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const userRoles = useSelector(selectRoles);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -76,26 +77,27 @@ const UserMenu = () => {
             </Typography>
           </Button>
         </NavLink>
-
-        <NavLink to="/admin">
-          <Button
-            key="admin"
-            sx={{
-              color: "black",
-              display: "block",
-              mx: "auto",
-            }}
-          >
-            <Typography
-              variant="button"
-              component="p"
-              textAlign="center"
-              fontSize="14px"
+        {userRoles?.includes("admin") && (
+          <NavLink to="/admin">
+            <Button
+              key="admin"
+              sx={{
+                color: "black",
+                display: "block",
+                mx: "auto",
+              }}
             >
-              Admin
-            </Typography>
-          </Button>
-        </NavLink>
+              <Typography
+                variant="button"
+                component="p"
+                textAlign="center"
+                fontSize="14px"
+              >
+                Admin
+              </Typography>
+            </Button>
+          </NavLink>
+        )}
 
         <Button
           key="logout"

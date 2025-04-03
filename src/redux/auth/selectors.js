@@ -8,7 +8,7 @@ export const selectIsRefreshing = (state) => state.auth.isRefreshing;
 
 export const selectUsers = (state) => state.auth.users.data;
 
-export const selectRoles = (state) => new Set(state.auth.user.role);
+export const selectRoles = (state) => state.auth.user.role;
 
 export const selectisRefreshingUsers = (state) => state.auth.users.isRefreshing;
 
