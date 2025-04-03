@@ -16,6 +16,7 @@ const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 const ProfilePage = lazy(() => import("../pages/ProfilePage/ProfilePage"));
 const ArticlePage = lazy(() => import("../pages/ArticlePage/ArticlePage"));
+const AdminPage = lazy(() => import("../pages/AdminPage/AdminPage"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const App = () => {
   return isRefreshing ? (
     <Box
       sx={{
-        mx: { xs: "45%", lg: "50%" },
+        mx: { xs: "45%", lg: "48%" },
         mt: { xs: "200px", md: "350px", lg: "500px" },
       }}
     >
@@ -59,6 +60,12 @@ const App = () => {
           path="/profile"
           element={
             <PrivateRoute redirectTo="/login" component={<ProfilePage />} />
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute redirectTo="/login" component={<AdminPage />} />
           }
         />
 

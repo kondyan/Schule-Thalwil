@@ -143,7 +143,6 @@ const Profile = () => {
           </TextField>
           <Box>
             <TextField
-              disabled
               type="password"
               name="password"
               label="Neues Passwort"

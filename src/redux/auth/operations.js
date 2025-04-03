@@ -39,6 +39,16 @@ export const logIn = createAsyncThunk(
   }
 );
 
+export const getUsers = createAsyncThunk("users/get", async (_, thunkAPI) => {
+  try {
+    const response = await axios.get("/users");
+
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
 export const updateAvatar = createAsyncThunk(
   "auth/updateAvatar",
   async (file, thunkAPI) => {

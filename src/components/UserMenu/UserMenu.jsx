@@ -57,7 +57,7 @@ const UserMenu = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <NavLink to="profile">
+        <NavLink to="/profile">
           <Button
             key="profile"
             sx={{
@@ -73,6 +73,26 @@ const UserMenu = () => {
               fontSize="14px"
             >
               Profil
+            </Typography>
+          </Button>
+        </NavLink>
+
+        <NavLink to="/admin">
+          <Button
+            key="admin"
+            sx={{
+              color: "black",
+              display: "block",
+              mx: "auto",
+            }}
+          >
+            <Typography
+              variant="button"
+              component="p"
+              textAlign="center"
+              fontSize="14px"
+            >
+              Admin
             </Typography>
           </Button>
         </NavLink>

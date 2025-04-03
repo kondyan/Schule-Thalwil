@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./auth/slice";
 import postsSlice from "./articles/slice";
 import categoriesSlice from "./categories/slice";
+import filtersSlice from "./filters/slice";
 
 import {
   persistStore,
@@ -26,6 +27,7 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
     posts: postsSlice,
     categories: categoriesSlice,
+    filters: filtersSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

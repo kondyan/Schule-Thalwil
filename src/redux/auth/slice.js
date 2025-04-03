@@ -6,6 +6,7 @@ import {
   refreshUser,
   updateAvatar,
   updateUserData,
+  getUsers,
 } from "./operations";
 
 const slice = createSlice({
@@ -17,11 +18,16 @@ const slice = createSlice({
       secondName: null,
       email: null,
       avatar: null,
+      role: [],
+    },
+    users: {
+      data: [],
+      isRefreshing: false,
+      error: undefined,
     },
     token: null,
     isLoggedIn: false,
     isRefreshing: true,
-    isAdmin: false,
     error: undefined,
   },
 
@@ -45,42 +51,54 @@ const slice = createSlice({
         state.isLoggedIn = false;
         state.error = undefined;
       })
-      .addCase(refreshUser.pending, (state) => {
-        state.isRefreshing = true;
-      })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.error = undefined;
       })
-      .addCase(refreshUser.rejected, (state, action) => {
-        state.isRefreshing = false;
-        state.error = action.payload;
-      })
-      .addCase(updateAvatar.pending, (state, action) => {
-        state.isRefreshing = true;
-      })
-      .addCase(updateAvatar.rejected, (state, action) => {
-        state.isRefreshing = false;
-        state.error = action.payload;
-      })
       .addCase(updateAvatar.fulfilled, (state, action) => {
         state.user.avatar = action.payload;
         state.isRefreshing = false;
         state.error = undefined;
       })
-      .addCase(updateUserData.pending, (state, action) => {
-        state.isRefreshing = true;
-      })
-      .addCase(updateUserData.rejected, (state, action) => {
-        state.isRefreshing = false;
-        state.error = action.payload;
-      })
       .addCase(updateUserData.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isRefreshing = false;
         state.error = undefined;
+      })
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.users.data = action.payload;
+        state.users.isRefreshing = false;
+        state.users.error = undefined;
+      })
+      .addCase(getUsers.pending, (state) => {
+        state.users.isRefreshing = true;
+      })
+      .addCase(refreshUser.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(updateAvatar.pending, (state, action) => {
+        state.isRefreshing = true;
+      })
+      .addCase(updateUserData.pending, (state, action) => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshUser.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+      .addCase(getUsers.rejected, (state, action) => {
+        state.users.isRefreshing = false;
+        state.users.error = action.payload;
+      })
+      .addCase(updateAvatar.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+      .addCase(updateUserData.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
       });
   },
 });
