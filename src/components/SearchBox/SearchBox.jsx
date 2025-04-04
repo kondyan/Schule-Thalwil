@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserFilter } from "../../redux/filters/slice";
 
@@ -7,14 +7,18 @@ const SearchBox = () => {
   const dispatch = useDispatch();
 
   return (
-    <TextField
-      variant="standard"
-      type="text"
-      value={value}
-      onChange={(e) => {
-        dispatch(setUserFilter(e.target.value));
-      }}
-    />
+    <Box sx={{ display: "flex", justifyContent: "center", mt: "50px" }}>
+      <TextField
+        variant="outlined"
+        type="text"
+        label="Nach Name suchen"
+        value={value}
+        sx={{ scale: { xs: "1", md: "1.3", lg: "1.4" } }}
+        onChange={(e) => {
+          dispatch(setUserFilter(e.target.value));
+        }}
+      />
+    </Box>
   );
 };
 

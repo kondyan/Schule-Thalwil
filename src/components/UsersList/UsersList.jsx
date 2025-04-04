@@ -19,19 +19,19 @@ const UsersList = () => {
 
   return (
     <ul>
-      <Grid container>
+      <Grid
+        mt={6}
+        spacing={4}
+        container
+        display="flex"
+        alignItems="flex-start"
+        justifyContent={{
+          xs: "center",
+          md: "flex-start",
+        }}
+      >
         {!isRefreshing &&
-          users?.map((user) => (
-            <User
-              key={user._id}
-              id={user._id}
-              username={user.username}
-              name={user.name}
-              secondName={user.secondName}
-              email={user.email}
-              avatar={user.avatar}
-            />
-          ))}
+          users?.map((user) => <User key={user._id} data={user} />)}
       </Grid>
     </ul>
   );

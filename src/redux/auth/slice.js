@@ -7,6 +7,7 @@ import {
   updateAvatar,
   updateUserData,
   getUsers,
+  setUserRole,
 } from "./operations";
 
 const slice = createSlice({

@@ -29,7 +29,7 @@ const App = () => {
   return isRefreshing ? (
     <Box
       sx={{
-        mx: { xs: "45%", lg: "48%" },
+        mx: { xs: "45%", md: "46.5%", lg: "48%" },
         mt: { xs: "200px", md: "350px", lg: "500px" },
       }}
     >
