@@ -73,6 +73,15 @@ const slice = createSlice({
         state.users.isRefreshing = false;
         state.users.error = undefined;
       })
+      // .addCase(setUserRole.fulfilled, (state, action) => {
+      //   console.log(...state.users.data);
+      //   const user = state.users.data.find(
+      //     (item) => (item._id = action.payload._id)
+      //   );
+      //   console.log(action.payload, user);
+      //   state.users.isRefreshing = false;
+      //   state.users.error = undefined;
+      // })
       .addCase(getUsers.pending, (state) => {
         state.users.isRefreshing = true;
       })

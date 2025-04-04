@@ -48,7 +48,7 @@ const User = (data) => {
             display: "flex",
             flexDirection: "column",
             gap: "8px",
-            p: { xs: "3px", md: "5px", lg: "7px" },
+            p: { xs: "10px", md: "13px", lg: "16px" },
           }}
         >
           <Box

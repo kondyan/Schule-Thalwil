@@ -84,7 +84,6 @@ export const setUserRole = createAsyncThunk(
   "auth/setUserRole",
   async ({ _id, data }, thunkAPI) => {
     try {
-      console.log(data);
       const response = await axios.patch(`/users/${_id}/role`, data);
       return response.data;
     } catch (error) {
