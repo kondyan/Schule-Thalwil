@@ -8,6 +8,9 @@ import { selectIsRefreshing } from "../redux/auth/selectors";
 import { refreshUser } from "../redux/auth/operations";
 import TutorialsList from "./TutorialsList/TutorialsList";
 import { Box, CircularProgress, Typography } from "@mui/material";
+import WriterPosts from "./WriterPosts/WriterPosts";
+import WriterTutorials from "./WriterTutorials/WriterTutorials";
+import WriterCategories from "./AdminCategories/AdminCategories";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const HelpPage = lazy(() => import("../pages/HelpPage/HelpPage"));
@@ -17,6 +20,7 @@ const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 const ProfilePage = lazy(() => import("../pages/ProfilePage/ProfilePage"));
 const ArticlePage = lazy(() => import("../pages/ArticlePage/ArticlePage"));
 const AdminPage = lazy(() => import("../pages/AdminPage/AdminPage"));
+const WriterPage = lazy(() => import("../pages/WriterPage/WriterPage"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -68,6 +72,28 @@ const App = () => {
             <PrivateRoute redirectTo="/login" component={<AdminPage />} />
           }
         />
+        <Route
+          path="/writer"
+          element={
+            <PrivateRoute redirectTo="/login" component={<WriterPage />} />
+          }
+        >
+          <Route
+            path="/writer/posts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<WriterPosts />} />
+            }
+          />
+          <Route
+            path="/writer/tutorials"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<WriterTutorials />}
+              />
+            }
+          />
+        </Route>
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>

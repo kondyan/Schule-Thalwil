@@ -12,6 +12,8 @@ export const selectRoles = (state) => state.auth.user.role;
 
 export const selectisRefreshingUsers = (state) => state.auth.users.isRefreshing;
 
+export const selectPostsByUserId = (state) => state.auth.posts;
+
 const selectFilterStatus = (state) => state.filters.status;
 
 export const selectFilteredUsers = createSelector(

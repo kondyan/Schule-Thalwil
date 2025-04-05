@@ -9,11 +9,13 @@ import {
   getUsers,
   setUserRole,
 } from "./operations";
+import { deletePost, getPostsByUserId } from "../articles/operations";
 
 const slice = createSlice({
   name: "auth",
   initialState: {
     user: {
+      id: null,
       username: null,
       name: null,
       secondName: null,
@@ -26,6 +28,8 @@ const slice = createSlice({
       isRefreshing: false,
       error: undefined,
     },
+    posts: [],
+    tutorials: [],
     token: null,
     isLoggedIn: false,
     isRefreshing: true,
@@ -73,6 +77,18 @@ const slice = createSlice({
         state.users.isRefreshing = false;
         state.users.error = undefined;
       })
+      .addCase(getPostsByUserId.fulfilled, (state, action) => {
+        state.posts = action.payload;
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.posts = state.posts.filter(
+          (item) => item._id !== action.payload._id
+        );
+      })
+
       // .addCase(setUserRole.fulfilled, (state, action) => {
       //   console.log(...state.users.data);
       //   const user = state.users.data.find(
@@ -88,6 +104,7 @@ const slice = createSlice({
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
       })
+
       .addCase(updateAvatar.pending, (state, action) => {
         state.isRefreshing = true;
       })
@@ -98,6 +115,7 @@ const slice = createSlice({
         state.isRefreshing = false;
         state.error = action.payload;
       })
+
       .addCase(getUsers.rejected, (state, action) => {
         state.users.isRefreshing = false;
         state.users.error = action.payload;

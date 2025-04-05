@@ -94,6 +94,8 @@ const ArticlePageComponent = () => {
                 py: { xs: "15px", md: "20px", lg: "30px" },
                 fontSize: { xs: "16px", md: "24px", lg: "32px" },
                 fontWeight: "400",
+                wordWrap: "break-word",
+                overflowWrap: "break-word",
               }}
             >
               {content}

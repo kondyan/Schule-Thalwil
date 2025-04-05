@@ -83,6 +83,7 @@ const Profile = () => {
             id="file-input"
             name="file"
             hidden
+            accept="image/*"
             onChange={handleAvatarChange}
             ref={fileInputRef}
           />

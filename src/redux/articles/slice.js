@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getPostById, getPosts } from "./operations";
+import { createPost, getPostById, getPosts, uploadImage } from "./operations";
 
 const slice = createSlice({
   name: "posts",
@@ -15,6 +15,7 @@ const slice = createSlice({
     },
     isRefreshing: false,
     error: undefined,
+    previewImage: undefined,
   },
 
   extraReducers: (builder) => {
@@ -44,6 +45,16 @@ const slice = createSlice({
       .addCase(getPostById.rejected, (state, action) => {
         state.currentPost.isRefreshing = false;
         state.currentPost.error = action.payload;
+      })
+      .addCase(uploadImage.fulfilled, (state, action) => {
+        state.previewImage = action.payload;
+      })
+      .addCase(createPost.pending, (state, action) => {
+        state.isRefreshing = true;
+      })
+      .addCase(createPost.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
       });
   },
 });

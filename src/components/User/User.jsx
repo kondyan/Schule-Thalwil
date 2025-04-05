@@ -103,7 +103,7 @@ const User = (data) => {
               </Button>
             </Box>
           </form>
-          <Avatar sx={{ mb: "5px", ml: "5px" }} src={avatar} />
+          {/* <Avatar sx={{ mb: "5px", ml: "5px" }} src={avatar} /> */}
         </Paper>
       </Grid>
     </li>

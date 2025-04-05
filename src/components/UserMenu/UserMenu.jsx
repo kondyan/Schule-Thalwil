@@ -98,7 +98,27 @@ const UserMenu = () => {
             </Button>
           </NavLink>
         )}
-
+        {userRoles?.includes("writer") && (
+          <NavLink to="/writer">
+            <Button
+              key="writer"
+              sx={{
+                color: "black",
+                display: "block",
+                mx: "auto",
+              }}
+            >
+              <Typography
+                variant="button"
+                component="p"
+                textAlign="center"
+                fontSize="14px"
+              >
+                Schreiber
+              </Typography>
+            </Button>
+          </NavLink>
+        )}
         <Button
           key="logout"
           onClick={() => {

@@ -6,3 +6,5 @@ export const selectCurrentPost = (state) => state.posts.currentPost.data;
 
 export const selectCurrentPostIsRefreshing = (state) =>
   state.posts.currentPost.isRefreshing;
+
+export const selectPreviewImage = (state) => state.posts.previewImage;

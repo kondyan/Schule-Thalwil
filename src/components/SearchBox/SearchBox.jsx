@@ -11,7 +11,7 @@ const SearchBox = () => {
       <TextField
         variant="outlined"
         type="text"
-        label="Nach Name suchen"
+        label="Nach Vorname suchen"
         value={value}
         sx={{ scale: { xs: "1", md: "1.3", lg: "1.4" } }}
         onChange={(e) => {

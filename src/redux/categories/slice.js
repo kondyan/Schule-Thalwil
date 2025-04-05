@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCategories, getTutorials } from "./operations";
+import { createCategory, getCategories, getTutorials } from "./operations";
 
 const pending = (state) => {
   state.isRefreshing = true;
