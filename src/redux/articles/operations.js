@@ -3,14 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
-// const setAuthHeader = (token) => {
-//   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-// };
-
-// const clearAuthHeader = () => {
-//   axios.defaults.headers.common.Authorization = "";
-// };
-
 export const getPosts = createAsyncThunk("posts/get", async (_, thunkAPI) => {
   try {
     const response = await axios.get("/posts");

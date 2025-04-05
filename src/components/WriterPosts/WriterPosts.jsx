@@ -87,7 +87,7 @@ const WriterPosts = () => {
                 gap: "30px",
               }}
             >
-              <Typography variant="h6" component="h2">
+              <Typography variant="h5" component="h2">
                 Erstellen Sie einen Artikel
               </Typography>
               <TextField fullWidth required label="Titel" name="title" />

@@ -98,6 +98,27 @@ const UserMenu = () => {
             </Button>
           </NavLink>
         )}
+        {userRoles?.includes("admin") && (
+          <NavLink to="/categories">
+            <Button
+              key="admin"
+              sx={{
+                color: "black",
+                display: "block",
+                mx: "auto",
+              }}
+            >
+              <Typography
+                variant="button"
+                component="p"
+                textAlign="center"
+                fontSize="14px"
+              >
+                Kategorien
+              </Typography>
+            </Button>
+          </NavLink>
+        )}
         {userRoles?.includes("writer") && (
           <NavLink to="/writer">
             <Button

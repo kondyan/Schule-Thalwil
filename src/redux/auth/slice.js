@@ -10,6 +10,7 @@ import {
   setUserRole,
 } from "./operations";
 import { deletePost, getPostsByUserId } from "../articles/operations";
+import { getTutorialsByUserId } from "../categories/operations";
 
 const slice = createSlice({
   name: "auth",
@@ -82,22 +83,24 @@ const slice = createSlice({
         state.isRefreshing = false;
         state.error = undefined;
       })
+      .addCase(getTutorialsByUserId.fulfilled, (state, action) => {
+        state.tutorials = action.payload;
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
       .addCase(deletePost.fulfilled, (state, action) => {
         console.log(action.payload);
         state.posts = state.posts.filter(
           (item) => item._id !== action.payload._id
         );
       })
-
-      // .addCase(setUserRole.fulfilled, (state, action) => {
-      //   console.log(...state.users.data);
-      //   const user = state.users.data.find(
-      //     (item) => (item._id = action.payload._id)
-      //   );
-      //   console.log(action.payload, user);
-      //   state.users.isRefreshing = false;
-      //   state.users.error = undefined;
-      // })
+      .addCase(setUserRole.fulfilled, (state, action) => {
+        const user = state.users.data.find(
+          (item) => item._id === action.payload._id
+        );
+        state.users.isRefreshing = false;
+        state.users.error = undefined;
+      })
       .addCase(getUsers.pending, (state) => {
         state.users.isRefreshing = true;
       })

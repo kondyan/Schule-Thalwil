@@ -10,7 +10,6 @@ import TutorialsList from "./TutorialsList/TutorialsList";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import WriterPosts from "./WriterPosts/WriterPosts";
 import WriterTutorials from "./WriterTutorials/WriterTutorials";
-import WriterCategories from "./AdminCategories/AdminCategories";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const HelpPage = lazy(() => import("../pages/HelpPage/HelpPage"));
@@ -21,6 +20,9 @@ const ProfilePage = lazy(() => import("../pages/ProfilePage/ProfilePage"));
 const ArticlePage = lazy(() => import("../pages/ArticlePage/ArticlePage"));
 const AdminPage = lazy(() => import("../pages/AdminPage/AdminPage"));
 const WriterPage = lazy(() => import("../pages/WriterPage/WriterPage"));
+const CategoriesPage = lazy(
+  () => import("../pages/CategoriesPage/CategoriesPage")
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -69,19 +71,41 @@ const App = () => {
         <Route
           path="/admin"
           element={
-            <PrivateRoute redirectTo="/login" component={<AdminPage />} />
+            <PrivateRoute
+              redirectTo="/login"
+              component={<AdminPage />}
+              roles={["admin"]}
+            />
+          }
+        />
+        <Route
+          path="/categories"
+          element={
+            <PrivateRoute
+              redirectTo="/login"
+              component={<CategoriesPage />}
+              roles={["admin"]}
+            />
           }
         />
         <Route
           path="/writer"
           element={
-            <PrivateRoute redirectTo="/login" component={<WriterPage />} />
+            <PrivateRoute
+              redirectTo="/login"
+              component={<WriterPage />}
+              roles={["writer"]}
+            />
           }
         >
           <Route
             path="/writer/posts"
             element={
-              <PrivateRoute redirectTo="/login" component={<WriterPosts />} />
+              <PrivateRoute
+                redirectTo="/login"
+                component={<WriterPosts />}
+                roles={["writer"]}
+              />
             }
           />
           <Route
@@ -90,6 +114,7 @@ const App = () => {
               <PrivateRoute
                 redirectTo="/login"
                 component={<WriterTutorials />}
+                roles={["writer"]}
               />
             }
           />

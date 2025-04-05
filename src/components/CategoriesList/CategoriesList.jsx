@@ -5,11 +5,10 @@ import {
   selectCategories,
   selectActiveCategory,
 } from "../../redux/categories/selectors";
-import css from "./CategoriesList.module.css";
-import { getCategories, getTutorials } from "../../redux/categories/operations";
+import { getCategories } from "../../redux/categories/operations";
 import Category from "../Category/Category";
 import { useNavigate } from "react-router";
-import { Box, ButtonGroup } from "@mui/material";
+import { Box } from "@mui/material";
 
 const CategoriesList = () => {
   const dispatch = useDispatch();

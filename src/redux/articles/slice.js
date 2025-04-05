@@ -6,7 +6,7 @@ const slice = createSlice({
   initialState: {
     currentPage: 1,
     totalPages: undefined,
-    limit: 10,
+    limit: 12,
     data: [],
     currentPost: {
       data: {},

@@ -4,7 +4,7 @@ import css from "./Category.module.css";
 const Category = ({ name, onClick }) => {
   return (
     <li>
-      <Box sx={{ textAlign: "center", mx: "auto" }}>
+      <Box sx={{ textAlign: "center", mx: "auto", overflow: "hidden" }}>
         <Button
           size="large"
           onClick={() => {

@@ -14,6 +14,8 @@ export const selectisRefreshingUsers = (state) => state.auth.users.isRefreshing;
 
 export const selectPostsByUserId = (state) => state.auth.posts;
 
+export const selectTutorialsByUserId = (state) => state.auth.tutorials;
+
 const selectFilterStatus = (state) => state.filters.status;
 
 export const selectFilteredUsers = createSelector(
