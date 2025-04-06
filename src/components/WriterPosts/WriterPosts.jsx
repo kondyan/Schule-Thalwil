@@ -54,11 +54,23 @@ const WriterPosts = () => {
   }, []);
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        gap: { xs: "35px", md: "50px", lg: "60px" },
+      }}
+    >
       <Button
         onClick={handleOpenCreate}
         variant="contained"
-        sx={{ backgroundColor: "green", color: "white" }}
+        size="large"
+        sx={{
+          backgroundColor: "green",
+          color: "white",
+          scale: { md: "1.2", lg: "1.4" },
+        }}
       >
         Artikel erstellen
       </Button>
@@ -84,7 +96,7 @@ const WriterPosts = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "30px",
+                gap: { xs: "15px", md: "25px", lg: "35px" },
               }}
             >
               <Typography variant="h5" component="h2">
@@ -163,7 +175,7 @@ const WriterPosts = () => {
                 label="Beschreibung"
                 name="content"
                 multiline
-                rows={10}
+                rows={5}
               />
 
               <Button
@@ -192,7 +204,7 @@ const WriterPosts = () => {
           {posts?.map((post) => (
             <WriterPost
               key={post._id}
-              id={post._id}
+              _id={post._id}
               title={post.title}
               imageUrl={post.imageUrl}
               content={post.content}

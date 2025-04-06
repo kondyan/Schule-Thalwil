@@ -44,9 +44,22 @@ export const getPostsByUserId = createAsyncThunk(
 
 export const createPost = createAsyncThunk(
   "posts/createPost",
-  async ({ title, imageUrl, content }, thunkAPI) => {
+  async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post("/posts", { title, imageUrl, content });
+      const response = await axios.post("/posts", credentials);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const changePost = createAsyncThunk(
+  "posts/changePost",
+  async ({ _id, data }, thunkAPI) => {
+    try {
+      const response = await axios.patch(`/posts/${_id}`, data);
 
       return response.data;
     } catch (error) {

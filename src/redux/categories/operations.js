@@ -31,9 +31,9 @@ export const getCategoriesById = createAsyncThunk(
 
 export const createCategory = createAsyncThunk(
   "categories/post",
-  async (name, thunkAPI) => {
+  async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post("/categories", { name });
+      const response = await axios.post("/categories", credentials);
 
       return response.data;
     } catch (error) {
@@ -88,6 +88,32 @@ export const createTutorial = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post("/tutorials", credentials);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const changeTutorial = createAsyncThunk(
+  "posts/changeTutorial",
+  async ({ _id, data }, thunkAPI) => {
+    try {
+      const response = await axios.patch(`/tutorials/${_id}`, data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteTutorial = createAsyncThunk(
+  "tutorials/deleteTutorial",
+  async (_id, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/tutorials/${id}`);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

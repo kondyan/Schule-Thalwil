@@ -23,8 +23,8 @@ const AdminCategories = () => {
 
     handleCloseCreate();
 
-    const categoryName = form.elements.category.value;
-    dispatch(createCategory(categoryName));
+    const name = form.elements.category.value;
+    dispatch(createCategory({ name }));
   };
 
   useEffect(() => {

@@ -15,6 +15,8 @@ import {
 } from "../../redux/categories/operations";
 import { selectTutorialsByUserId } from "../../redux/auth/selectors";
 import { selectCategories } from "../../redux/categories/selectors";
+import WriterTutorial from "../WriterTutorial/WriterTutorial";
+import Grid from "@mui/material/Grid2";
 
 const WriterTutorials = () => {
   const [openCreate, setOpenCreate] = useState(false);
@@ -52,11 +54,23 @@ const WriterTutorials = () => {
     dispatch(getCategories());
   }, []);
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        gap: { xs: "35px", md: "50px", lg: "60px" },
+      }}
+    >
       <Button
         onClick={handleOpenCreate}
         variant="contained"
-        sx={{ backgroundColor: "green", color: "white" }}
+        size="large"
+        sx={{
+          backgroundColor: "green",
+          color: "white",
+          scale: { md: "1.2", lg: "1.4" },
+        }}
       >
         Tutorial erstellen
       </Button>
@@ -124,7 +138,7 @@ const WriterTutorials = () => {
                 label="Beschreibung"
                 name="description"
                 multiline
-                rows={10}
+                rows={5}
               />
 
               <Button
@@ -139,6 +153,29 @@ const WriterTutorials = () => {
           </form>
         </Box>
       </Modal>
+      <ul>
+        <Grid
+          spacing={6}
+          container
+          display="flex"
+          alignItems="flex-start"
+          justifyContent={{
+            xs: "center",
+            lg: "flex-start",
+          }}
+        >
+          {tutorials?.map((tutorial) => (
+            <WriterTutorial
+              key={tutorial._id}
+              _id={tutorial._id}
+              title={tutorial.title}
+              videoUrl={tutorial.videoUrl}
+              description={tutorial.description}
+              author={tutorial.author}
+            />
+          ))}
+        </Grid>
+      </ul>
     </Box>
   );
 };

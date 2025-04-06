@@ -31,7 +31,15 @@ const Tutorial = ({ title, description, videoUrl }) => {
               {title}
             </Typography>
 
-            <Typography variant="body" component="p">
+            <Typography
+              sx={{
+                height: "72px",
+                wordWrap: "break-word",
+                overflowWrap: "break-word",
+              }}
+              variant="body"
+              component="p"
+            >
               {description}
             </Typography>
           </Box>
