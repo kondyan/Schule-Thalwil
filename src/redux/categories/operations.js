@@ -46,9 +46,9 @@ export const deleteCategory = createAsyncThunk(
   "categories/delete",
   async (_id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/categories/${_id}`);
+      await axios.delete(`/categories/${_id}`);
 
-      return response.data;
+      return _id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -112,9 +112,9 @@ export const deleteTutorial = createAsyncThunk(
   "tutorials/deleteTutorial",
   async (_id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/tutorials/${id}`);
+      await axios.delete(`/tutorials/${_id}`);
 
-      return response.data;
+      return { _id };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

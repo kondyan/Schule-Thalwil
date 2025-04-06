@@ -24,17 +24,21 @@ import {
   selectCurrentPost,
   selectPreviewImage,
 } from "../../redux/articles/selectors";
+import { clearPreviewImage } from "../../redux/articles/slice";
 
 const WriterPost = ({ _id, title, imageUrl, content, author }) => {
-  const [openChange, setOpenChange] = useState(false);
-  const handleOpenChange = () => setOpenChange(true);
-  const handleCloseChange = () => setOpenChange(false);
-  const fileInputRef = useRef(null);
-
-  const [isFileOpen, setIsFileOpen] = useState(true);
-
   const dispatch = useDispatch();
   const image = useSelector(selectPreviewImage);
+  const handleCloseChange = () => setOpenChange(false);
+  const fileInputRef = useRef(null);
+  const [isFileOpen, setIsFileOpen] = useState(true);
+
+  const [openChange, setOpenChange] = useState(false);
+  const handleOpenChange = () => {
+    dispatch(clearPreviewImage());
+    setIsFileOpen(true);
+    setOpenChange(true);
+  };
 
   const openFileInput = () => {
     fileInputRef.current.click();
@@ -127,7 +131,7 @@ const WriterPost = ({ _id, title, imageUrl, content, author }) => {
                 size="medium"
                 variant="contained"
                 onClick={() => {
-                  dispatch(deletePost(id));
+                  dispatch(deletePost(_id));
                 }}
                 sx={{ backgroundColor: "red", color: "white" }}
               >

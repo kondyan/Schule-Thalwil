@@ -11,18 +11,25 @@ import {
 import { selectPostsByUserId } from "../../redux/auth/selectors";
 import Grid from "@mui/material/Grid2";
 import WriterPost from "../WriterPost/WriterPost";
+import { clearPreviewImage } from "../../redux/articles/slice";
 
 const WriterPosts = () => {
-  const [openCreate, setOpenCreate] = useState(false);
-  const handleOpenCreate = () => setOpenCreate(true);
+  const dispatch = useDispatch();
+
   const handleCloseCreate = () => setOpenCreate(false);
   const fileInputRef = useRef(null);
 
   const [isFileOpen, setIsFileOpen] = useState(false);
+  const [openCreate, setOpenCreate] = useState(false);
+  const handleOpenCreate = () => {
+    dispatch(clearPreviewImage());
+    setIsFileOpen(false);
+    setOpenCreate(true);
+  };
 
-  const dispatch = useDispatch();
   const image = useSelector(selectPreviewImage);
   const posts = useSelector(selectPostsByUserId);
+  console.log(posts);
 
   const openFileInput = () => {
     fileInputRef.current.click();

@@ -17,7 +17,11 @@ const slice = createSlice({
     error: undefined,
     previewImage: undefined,
   },
-
+  reducers: {
+    clearPreviewImage(state) {
+      state.previewImage = undefined;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getPosts.fulfilled, (state, action) => {
@@ -59,4 +63,5 @@ const slice = createSlice({
   },
 });
 
+export const { clearPreviewImage } = slice.actions;
 export default slice.reducer;

@@ -43,7 +43,7 @@ export const getPostsByUserId = createAsyncThunk(
 );
 
 export const createPost = createAsyncThunk(
-  "posts/createPost",
+  "posts/create",
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post("/posts", credentials);
@@ -56,7 +56,7 @@ export const createPost = createAsyncThunk(
 );
 
 export const changePost = createAsyncThunk(
-  "posts/changePost",
+  "posts/change",
   async ({ _id, data }, thunkAPI) => {
     try {
       const response = await axios.patch(`/posts/${_id}`, data);
@@ -69,12 +69,12 @@ export const changePost = createAsyncThunk(
 );
 
 export const deletePost = createAsyncThunk(
-  "posts/deletePost",
-  async (id, thunkAPI) => {
+  "posts/delete",
+  async (_id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/posts/${id}`);
+      await axios.delete(`/posts/${_id}`);
 
-      return response.data;
+      return _id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

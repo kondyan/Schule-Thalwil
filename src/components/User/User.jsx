@@ -11,23 +11,28 @@ import {
 import Grid from "@mui/material/Grid2";
 import { useDispatch } from "react-redux";
 import { setUserRole } from "../../redux/auth/operations";
+import { useState } from "react";
 
 const User = (data) => {
+  const { _id, username, name, secondName, email, avatar, role } = data.data;
+
+  const [writer, setWriter] = useState(() => role.includes("writer"));
+  const [moderator, setModerator] = useState(() => role.includes("moderator"));
+  const [admin, setAdmin] = useState(() => role.includes("admin"));
+
   const dispatch = useDispatch();
 
-  const { _id, username, name, secondName, email, avatar, role } = data.data;
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = e.target;
 
     const role = [];
-    if (form.elements.writer.checked) {
+    if (writer) {
       role.push("writer");
     }
-    if (form.elements.moderator.checked) {
+    if (moderator) {
       role.push("moderator");
     }
-    if (form.elements.admin.checked) {
+    if (admin) {
       role.push("admin");
     }
 
@@ -58,15 +63,17 @@ const User = (data) => {
               alignItems: "baseline",
               flexDirection: "column",
               gap: "6px",
+              pt: "10px",
 
               borderRadius: 1,
             }}
           >
+            <Avatar sx={{ mb: "5px", ml: "5px" }} src={avatar} />
+
             <Typography>Benutzername: {username}</Typography>
             <Typography>Vorname: {name}</Typography>
             <Typography>Nachname: {secondName}</Typography>
             <Typography>E-Mail: {email}</Typography>
-            <Typography>Rolen: {role.join(" ") || "keine Rolen"}</Typography>
           </Box>
 
           <form onSubmit={handleSubmit}>
@@ -84,16 +91,22 @@ const User = (data) => {
               <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
                 <FormControlLabel
                   control={<Checkbox />}
+                  checked={writer}
+                  onChange={() => setWriter((prev) => !prev)}
                   label="Writer"
                   name="writer"
                 />
                 <FormControlLabel
                   control={<Checkbox />}
+                  checked={moderator}
+                  onChange={() => setModerator((prev) => !prev)}
                   label="Moderator"
                   name="moderator"
                 />
                 <FormControlLabel
                   control={<Checkbox />}
+                  checked={admin}
+                  onChange={() => setAdmin((prev) => !prev)}
                   label="Admin"
                   name="admin"
                 />
@@ -103,7 +116,6 @@ const User = (data) => {
               </Button>
             </Box>
           </form>
-          {/* <Avatar sx={{ mb: "5px", ml: "5px" }} src={avatar} /> */}
         </Paper>
       </Grid>
     </li>

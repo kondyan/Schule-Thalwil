@@ -9,7 +9,12 @@ import {
   getUsers,
   setUserRole,
 } from "./operations";
-import { deletePost, getPostsByUserId } from "../articles/operations";
+import {
+  changePost,
+  createPost,
+  deletePost,
+  getPostsByUserId,
+} from "../articles/operations";
 import { getTutorialsByUserId } from "../categories/operations";
 
 const slice = createSlice({
@@ -57,61 +62,14 @@ const slice = createSlice({
         state.isLoggedIn = false;
         state.error = undefined;
       })
+
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.error = undefined;
       })
-      .addCase(updateAvatar.fulfilled, (state, action) => {
-        state.user.avatar = action.payload;
-        state.isRefreshing = false;
-        state.error = undefined;
-      })
-      .addCase(updateUserData.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isRefreshing = false;
-        state.error = undefined;
-      })
-      .addCase(getUsers.fulfilled, (state, action) => {
-        state.users.data = action.payload;
-        state.users.isRefreshing = false;
-        state.users.error = undefined;
-      })
-      .addCase(getPostsByUserId.fulfilled, (state, action) => {
-        state.posts = action.payload;
-        state.isRefreshing = false;
-        state.error = undefined;
-      })
-      .addCase(getTutorialsByUserId.fulfilled, (state, action) => {
-        state.tutorials = action.payload;
-        state.isRefreshing = false;
-        state.error = undefined;
-      })
-      .addCase(deletePost.fulfilled, (state, action) => {
-        console.log(action.payload);
-        state.posts = state.posts.filter(
-          (item) => item._id !== action.payload._id
-        );
-      })
-      .addCase(setUserRole.fulfilled, (state, action) => {
-        const user = state.users.data.find(
-          (item) => item._id === action.payload._id
-        );
-        state.users.isRefreshing = false;
-        state.users.error = undefined;
-      })
-      .addCase(getUsers.pending, (state) => {
-        state.users.isRefreshing = true;
-      })
       .addCase(refreshUser.pending, (state) => {
-        state.isRefreshing = true;
-      })
-
-      .addCase(updateAvatar.pending, (state, action) => {
-        state.isRefreshing = true;
-      })
-      .addCase(updateUserData.pending, (state, action) => {
         state.isRefreshing = true;
       })
       .addCase(refreshUser.rejected, (state, action) => {
@@ -119,15 +77,96 @@ const slice = createSlice({
         state.error = action.payload;
       })
 
-      .addCase(getUsers.rejected, (state, action) => {
-        state.users.isRefreshing = false;
-        state.users.error = action.payload;
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        state.user.avatar = action.payload;
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+      .addCase(updateAvatar.pending, (state, action) => {
+        state.isRefreshing = true;
       })
       .addCase(updateAvatar.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
       })
+
+      .addCase(updateUserData.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+      .addCase(updateUserData.pending, (state, action) => {
+        state.isRefreshing = true;
+      })
       .addCase(updateUserData.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.users.data = action.payload;
+        state.users.isRefreshing = false;
+        state.users.error = undefined;
+      })
+      .addCase(getUsers.pending, (state) => {
+        state.users.isRefreshing = true;
+      })
+      .addCase(getUsers.rejected, (state, action) => {
+        state.users.isRefreshing = false;
+        state.users.error = action.payload;
+      })
+
+      .addCase(getPostsByUserId.fulfilled, (state, action) => {
+        state.posts = action.payload;
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+
+      .addCase(getTutorialsByUserId.fulfilled, (state, action) => {
+        state.tutorials = action.payload;
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+
+      .addCase(setUserRole.fulfilled, (state, action) => {
+        state.users.data = state.users.data.map((user) =>
+          user._id === action.payload._id ? action.payload : user
+        );
+        state.users.isRefreshing = false;
+        state.users.error = undefined;
+      })
+
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.posts.push(action.payload);
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+
+      .addCase(createPost.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.posts = state.posts.filter(({ _id }) => _id !== action.payload);
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+
+      .addCase(deletePost.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+
+      .addCase(changePost.fulfilled, (state, action) => {
+        state.posts = state.posts.map((post) =>
+          post._id === action.payload._id ? action.payload : post
+        );
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+
+      .addCase(changePost.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
       });

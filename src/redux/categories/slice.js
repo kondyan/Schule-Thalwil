@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createCategory, getCategories, getTutorials } from "./operations";
+import {
+  createCategory,
+  deleteCategory,
+  getCategories,
+  getTutorials,
+} from "./operations";
 
 const pending = (state) => {
   state.isRefreshing = true;
@@ -44,6 +49,32 @@ const slice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(getTutorials.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteCategory.fulfilled, (state, action) => {
+        state.categories = state.categories.filter(
+          ({ _id }) => _id !== action.payload
+        );
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+      .addCase(deleteCategory.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(deleteCategory.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+      .addCase(createCategory.fulfilled, (state, action) => {
+        state.categories.push(action.payload);
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+      .addCase(createCategory.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(createCategory.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
       });
