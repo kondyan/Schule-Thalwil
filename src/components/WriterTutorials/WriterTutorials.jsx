@@ -161,6 +161,7 @@ const WriterTutorials = () => {
           alignItems="flex-start"
           justifyContent={{
             xs: "center",
+            md: "flex-start",
             lg: "flex-start",
           }}
         >

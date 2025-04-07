@@ -15,7 +15,12 @@ import {
   deletePost,
   getPostsByUserId,
 } from "../articles/operations";
-import { getTutorialsByUserId } from "../categories/operations";
+import {
+  changeTutorial,
+  createTutorial,
+  deleteTutorial,
+  getTutorialsByUserId,
+} from "../categories/operations";
 
 const slice = createSlice({
   name: "auth",
@@ -167,6 +172,42 @@ const slice = createSlice({
       })
 
       .addCase(changePost.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+
+      .addCase(createTutorial.fulfilled, (state, action) => {
+        state.tutorials = state.tutorials.push(action.payload);
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+      .addCase(createTutorial.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+
+      .addCase(deleteTutorial.fulfilled, (state, action) => {
+        state.tutorials = state.tutorials.filter(
+          ({ _id }) => _id !== action.payload
+        );
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+
+      .addCase(deleteTutorial.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+
+      .addCase(changeTutorial.fulfilled, (state, action) => {
+        state.tutorials = state.tutorials.map((tutorial) =>
+          tutorial._id === action.payload._id ? action.payload : tutorial
+        );
+        state.isRefreshing = false;
+        state.error = undefined;
+      })
+
+      .addCase(changeTutorial.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
       });

@@ -6,14 +6,18 @@ import { deleteTutorial } from "../../redux/categories/operations";
 import { useRef, useState } from "react";
 
 const WriterTutorial = ({ _id, title, videoUrl, description, author }) => {
-  const [openChange, setOpenChange] = useState(false);
-  const handleOpenChange = () => setOpenChange(true);
-  const handleCloseChange = () => setOpenChange(false);
-  const fileInputRef = useRef(null);
-
   const [isFileOpen, setIsFileOpen] = useState(false);
 
   const dispatch = useDispatch();
+
+  const [openChange, setOpenChange] = useState(false);
+  const handleOpenChange = () => {
+    dispatch(clearPreviewImage());
+    setIsFileOpen(true);
+    setOpenChange(true);
+  };
+  const handleCloseChange = () => setOpenChange(false);
+  const fileInputRef = useRef(null);
 
   const openFileInput = () => {
     fileInputRef.current.click();
