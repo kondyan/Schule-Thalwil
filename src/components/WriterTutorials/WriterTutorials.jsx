@@ -169,6 +169,7 @@ const WriterTutorials = () => {
             <WriterTutorial
               key={tutorial._id}
               _id={tutorial._id}
+              category={tutorial.category}
               title={tutorial.title}
               videoUrl={tutorial.videoUrl}
               description={tutorial.description}

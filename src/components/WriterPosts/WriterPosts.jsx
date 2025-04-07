@@ -29,7 +29,6 @@ const WriterPosts = () => {
 
   const image = useSelector(selectPreviewImage);
   const posts = useSelector(selectPostsByUserId);
-  console.log(posts);
 
   const openFileInput = () => {
     fileInputRef.current.click();

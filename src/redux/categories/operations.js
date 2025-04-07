@@ -114,7 +114,7 @@ export const deleteTutorial = createAsyncThunk(
     try {
       await axios.delete(`/tutorials/${_id}`);
 
-      return { _id };
+      return _id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

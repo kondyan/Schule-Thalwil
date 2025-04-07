@@ -177,7 +177,7 @@ const slice = createSlice({
       })
 
       .addCase(createTutorial.fulfilled, (state, action) => {
-        state.tutorials = state.tutorials.push(action.payload);
+        state.tutorials.push(action.payload);
         state.isRefreshing = false;
         state.error = undefined;
       })
