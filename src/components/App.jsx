@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "../redux/auth/selectors";
 import { refreshUser } from "../redux/auth/operations";
 import TutorialsList from "./TutorialsList/TutorialsList";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import WriterPosts from "./WriterPosts/WriterPosts";
 import WriterTutorials from "./WriterTutorials/WriterTutorials";
+import { Toaster } from "sonner";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const HelpPage = lazy(() => import("../pages/HelpPage/HelpPage"));
@@ -45,84 +46,89 @@ const App = () => {
       />
     </Box>
   ) : (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="/posts/:id" element={<ArticlePage />} />
-        <Route path="/help" element={<HelpPage />}>
-          <Route path="/help/:category" element={<TutorialsList />} />
-        </Route>
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute redirectTo="/" component={<RegisterPage />} />
-          }
-        />
-        <Route
-          path="/login"
-          element={<RestrictedRoute redirectTo="/" component={<LoginPage />} />}
-        />
-        <Route
-          path="/profile"
-          element={
-            <PrivateRoute redirectTo="/login" component={<ProfilePage />} />
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <PrivateRoute
-              redirectTo="/login"
-              component={<AdminPage />}
-              roles={["admin"]}
-            />
-          }
-        />
-        <Route
-          path="/categories"
-          element={
-            <PrivateRoute
-              redirectTo="/login"
-              component={<CategoriesPage />}
-              roles={["admin"]}
-            />
-          }
-        />
-        <Route
-          path="/writer"
-          element={
-            <PrivateRoute
-              redirectTo="/login"
-              component={<WriterPage />}
-              roles={["writer"]}
-            />
-          }
-        >
+    <>
+      <Toaster richColors position="top-right" />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/posts/:id" element={<ArticlePage />} />
+          <Route path="/help" element={<HelpPage />}>
+            <Route path="/help/:category" element={<TutorialsList />} />
+          </Route>
           <Route
-            path="/writer/posts"
+            path="/register"
+            element={
+              <RestrictedRoute redirectTo="/" component={<RegisterPage />} />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/" component={<LoginPage />} />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ProfilePage />} />
+            }
+          />
+          <Route
+            path="/admin"
             element={
               <PrivateRoute
                 redirectTo="/login"
-                component={<WriterPosts />}
-                roles={["writer"]}
+                component={<AdminPage />}
+                roles={["admin"]}
               />
             }
           />
           <Route
-            path="/writer/tutorials"
+            path="/categories"
             element={
               <PrivateRoute
                 redirectTo="/login"
-                component={<WriterTutorials />}
-                roles={["writer"]}
+                component={<CategoriesPage />}
+                roles={["admin"]}
               />
             }
           />
-        </Route>
+          <Route
+            path="/writer"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<WriterPage />}
+                roles={["writer"]}
+              />
+            }
+          >
+            <Route
+              path="/writer/posts"
+              element={
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<WriterPosts />}
+                  roles={["writer"]}
+                />
+              }
+            />
+            <Route
+              path="/writer/tutorials"
+              element={
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<WriterTutorials />}
+                  roles={["writer"]}
+                />
+              }
+            />
+          </Route>
 
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </>
   );
 };
 

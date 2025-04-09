@@ -17,13 +17,18 @@ import { selectTutorialsByUserId } from "../../redux/auth/selectors";
 import { selectCategories } from "../../redux/categories/selectors";
 import WriterTutorial from "../WriterTutorial/WriterTutorial";
 import Grid from "@mui/material/Grid2";
+import { toast } from "sonner";
 
 const WriterTutorials = () => {
   const [openCreate, setOpenCreate] = useState(false);
   const [category, setCategory] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const handleOpenCreate = () => setOpenCreate(true);
-  const handleCloseCreate = () => setOpenCreate(false);
+
+  const handleCloseCreate = () => {
+    setCategory("");
+    setOpenCreate(false);
+  };
 
   const dispatch = useDispatch();
   const tutorials = useSelector(selectTutorialsByUserId);
@@ -46,7 +51,17 @@ const WriterTutorials = () => {
 
     dispatch(
       createTutorial({ category: categoryId, title, videoUrl, description })
-    );
+    )
+      .unwrap()
+      .then(() => {
+        toast.success("Tutorial ist erfolgreich erstellt!");
+      })
+      .catch(() => {
+        toast.error(
+          "Erstellung fehlgeschlagen. Bitte prüfen Sie Anzahl von Zeichen"
+        );
+        setIsError(true);
+      });
   };
 
   useEffect(() => {
@@ -123,7 +138,13 @@ const WriterTutorials = () => {
                   </MenuItem>
                 ))}
               </TextField>
-              <TextField fullWidth required label="Titel" name="title" />
+              <TextField
+                fullWidth
+                required
+                label="Titel"
+                name="title"
+                placeholder="Max. 27 Zeichen"
+              />
 
               <TextField
                 fullWidth
@@ -139,6 +160,7 @@ const WriterTutorials = () => {
                 name="description"
                 multiline
                 rows={5}
+                placeholder="Mind. 10 Zeichen"
               />
 
               <Button

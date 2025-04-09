@@ -11,8 +11,11 @@ import {
 } from "@mui/material";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import { Link } from "react-router";
+import { toast } from "sonner";
+import { useState } from "react";
 
 const RegisterForm = () => {
+  const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -30,12 +33,15 @@ const RegisterForm = () => {
     )
       .unwrap()
       .then(() => {
-        console.log("register success");
+        toast.success("Registrierung erfolgreich! Willkommen");
+        setIsError(false);
       })
       .catch(() => {
-        console.log("register error");
+        toast.error(
+          "Registrierung fehlgeschlagen. Bitte prüfen Sie Ihre Eingaben"
+        );
+        setIsError(true);
       });
-    //   заменить на MUI уведомления
   };
 
   return (
@@ -85,70 +91,141 @@ const RegisterForm = () => {
               gap: { xs: "20px", md: "30px", lg: "40px" },
             }}
           >
-            <TextField
-              sx={{
-                scale: { xs: "1", md: "1.2", lg: "1.4" },
-              }}
-              fullWidth
-              required
-              variant="outlined"
-              label="Benutzername"
-              type="text"
-              name="username"
-              placeholder="Benutzername"
-            />
+            {!isError && (
+              <>
+                {" "}
+                <TextField
+                  sx={{
+                    scale: { xs: "1", md: "1.2", lg: "1.4" },
+                  }}
+                  fullWidth
+                  required
+                  variant="outlined"
+                  label="Benutzername"
+                  type="text"
+                  name="username"
+                  placeholder="Benutzername"
+                />
+                <TextField
+                  sx={{
+                    scale: { xs: "1", md: "1.2", lg: "1.4" },
+                  }}
+                  fullWidth
+                  required
+                  variant="filled"
+                  label="Vorname"
+                  type="text"
+                  name="name"
+                  placeholder="Vorname"
+                />
+                <TextField
+                  sx={{
+                    scale: { xs: "1", md: "1.2", lg: "1.4" },
+                  }}
+                  fullWidth
+                  variant="filled"
+                  label="Nachname"
+                  type="text"
+                  name="secondName"
+                  placeholder="Nachname"
+                />
+                <TextField
+                  sx={{
+                    scale: { xs: "1", md: "1.2", lg: "1.4" },
+                  }}
+                  fullWidth
+                  required
+                  variant="filled"
+                  label="E-mail"
+                  type="email"
+                  name="email"
+                  placeholder="E-mail"
+                />
+                <TextField
+                  sx={{
+                    scale: { xs: "1", md: "1.2", lg: "1.4" },
+                  }}
+                  color="primary"
+                  fullWidth
+                  required
+                  variant="filled"
+                  label="Passwort"
+                  type="password"
+                  name="password"
+                  placeholder="Mindestens 8 Zeichen"
+                />
+              </>
+            )}
 
-            <TextField
-              sx={{
-                scale: { xs: "1", md: "1.2", lg: "1.4" },
-              }}
-              fullWidth
-              required
-              variant="filled"
-              label="Vorname"
-              type="text"
-              name="name"
-              placeholder="Vorname"
-            />
-
-            <TextField
-              sx={{
-                scale: { xs: "1", md: "1.2", lg: "1.4" },
-              }}
-              fullWidth
-              variant="filled"
-              label="Nachname"
-              type="text"
-              name="secondName"
-              placeholder="Nachname"
-            />
-
-            <TextField
-              sx={{
-                scale: { xs: "1", md: "1.2", lg: "1.4" },
-              }}
-              fullWidth
-              required
-              variant="filled"
-              label="E-mail"
-              type="email"
-              name="email"
-              placeholder="E-mail"
-            />
-
-            <TextField
-              sx={{
-                scale: { xs: "1", md: "1.2", lg: "1.4" },
-              }}
-              color="primary"
-              fullWidth
-              required
-              variant="filled"
-              label="Passwort"
-              type="password"
-              name="password"
-              placeholder="Passwort"
-            />
+            {isError && (
+              <>
+                <TextField
+                  sx={{
+                    scale: { xs: "1", md: "1.2", lg: "1.4" },
+                  }}
+                  error
+                  fullWidth
+                  required
+                  variant="outlined"
+                  label="Benutzername"
+                  type="text"
+                  name="username"
+                  placeholder="Benutzername"
+                />
+                <TextField
+                  sx={{
+                    scale: { xs: "1", md: "1.2", lg: "1.4" },
+                  }}
+                  error
+                  fullWidth
+                  required
+                  variant="filled"
+                  label="Vorname"
+                  type="text"
+                  name="name"
+                  placeholder="Vorname"
+                />
+                <TextField
+                  sx={{
+                    scale: { xs: "1", md: "1.2", lg: "1.4" },
+                  }}
+                  error
+                  fullWidth
+                  variant="filled"
+                  label="Nachname"
+                  type="text"
+                  name="secondName"
+                  placeholder="Nachname"
+                />
+                <TextField
+                  sx={{
+                    scale: { xs: "1", md: "1.2", lg: "1.4" },
+                  }}
+                  error
+                  fullWidth
+                  required
+                  variant="filled"
+                  label="E-mail"
+                  type="email"
+                  name="email"
+                  placeholder="E-mail"
+                />
+                <TextField
+                  sx={{
+                    scale: { xs: "1", md: "1.2", lg: "1.4" },
+                  }}
+                  error
+                  color="primary"
+                  fullWidth
+                  required
+                  variant="filled"
+                  label="Passwort"
+                  type="password"
+                  name="password"
+                  placeholder="Mindestens 8 Zeichen"
+                />
+              </>
+            )}
 
             <Button
               sx={{
@@ -160,7 +237,7 @@ const RegisterForm = () => {
               type="submit"
               variant="contained"
             >
-              Anmelden
+              Registrieren
             </Button>
 
             <Box

@@ -14,8 +14,12 @@ import {
   changeTutorial,
   deleteTutorial,
 } from "../../redux/categories/operations";
-import { useRef, useState } from "react";
-import { selectCategories } from "../../redux/categories/selectors";
+import { useState } from "react";
+import {
+  selectActiveCategory,
+  selectCategories,
+} from "../../redux/categories/selectors";
+import { clearActiveCategory } from "../../redux/categories/slice";
 
 const WriterTutorial = ({
   _id,
@@ -25,24 +29,33 @@ const WriterTutorial = ({
   description,
   author,
 }) => {
+  const categories = useSelector(selectCategories);
+  const activeCategory = useSelector(selectActiveCategory);
+  let categoryToFind = categories.find(
+    (category) => category._id === activeCategory
+  );
+  categoryToFind = categoryToFind?.name;
   const [openChange, setOpenChange] = useState(false);
   const [stateCategory, setStateCategory] = useState("");
   const [categoryId, setCategoryId] = useState("");
 
-  const handleCloseChange = () => setOpenChange(false);
-
   const dispatch = useDispatch();
-  const categories = useSelector(selectCategories);
 
   const handleOpenChange = () => {
+    setOpenChange(true);
+  };
+
+  const handleCloseChange = () => {
     setStateCategory("");
     setCategoryId("");
-    setOpenChange(true);
+
+    setOpenChange(false);
   };
 
   const handleChange = (e) => {
     setStateCategory(e.target.value);
     setCategoryId(e.explicitOriginalTarget.id);
+    dispatch(clearActiveCategory());
   };
 
   const handleSubmit = (e) => {
@@ -50,13 +63,13 @@ const WriterTutorial = ({
     const form = e.target;
 
     handleCloseChange();
+    setStateCategory(categoryToFind);
+    setCategoryId(activeCategory);
 
     const formTitle = form.elements.title.value;
     const formVideoUrl = form.elements.videoUrl.value;
     const formDescription = form.elements.description.value;
     const formCategory = categoryId ? categoryId : category._id;
-
-    setStateCategory(formCategory);
 
     dispatch(
       changeTutorial({
@@ -98,7 +111,6 @@ const WriterTutorial = ({
             >
               {title}
             </Typography>
-
             <Typography
               sx={{
                 height: "120px",
@@ -117,117 +129,136 @@ const WriterTutorial = ({
           <Box
             sx={{
               display: "flex",
-              gap: { xs: "10px", md: "40px", lg: "15px" },
-              py: { xs: "5px", md: "12.5px", lg: "15px" },
               alignItems: "center",
               justifyContent: "center",
+              paddingLeft: "10px",
+              paddingBottom: "5px",
+              paddingRight: "10px",
             }}
           >
-            <Button
-              size="medium"
-              variant="contained"
-              onClick={handleOpenChange}
-              sx={{ backgroundColor: "blue", color: "white" }}
-            >
-              Tutorial ändern
-            </Button>
-            <Button
-              size="medium"
-              variant="contained"
-              onClick={() => {
-                dispatch(deletePost(_id));
-              }}
-              sx={{ backgroundColor: "red", color: "white" }}
-            >
-              Tutorial löschen
-            </Button>
-          </Box>
-          <Modal open={openChange} onClose={handleCloseChange}>
             <Box
               sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: { xs: "370px", md: "450px", lg: "550px" },
-                bgcolor: "background.paper",
-                border: "1px solid #000",
-                borderRadius: "5px",
-                boxShadow: 24,
-                p: 4,
+                display: "flex",
+                gap: { xs: "10px", md: "40px", lg: "15px" },
+                py: { xs: "5px", md: "12.5px", lg: "15px" },
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <form onSubmit={handleSubmit} autoComplete="off">
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "30px",
-                  }}
-                >
-                  <Typography variant="h5" component="h2">
-                    Erstellen Sie ein Tutorial
-                  </Typography>
-
-                  <TextField
-                    sx={{ width: "300px" }}
-                    name="category"
-                    select
-                    required
-                    value={stateCategory ? stateCategory : category.name}
-                    onChange={handleChange}
-                    variant="outlined"
-                    label="Kategorie"
-                  >
-                    {categories?.map((category) => (
-                      <MenuItem
-                        key={category._id}
-                        id={category._id}
-                        value={category.name}
-                      >
-                        {category.name}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                  <TextField
-                    fullWidth
-                    required
-                    defaultValue={title}
-                    label="Titel"
-                    name="title"
-                  />
-
-                  <TextField
-                    fullWidth
-                    required
-                    defaultValue={videoUrl}
-                    label="YouTube-Link"
-                    name="videoUrl"
-                  />
-
-                  <TextField
-                    fullWidth
-                    required
-                    defaultValue={description}
-                    label="Beschreibung"
-                    name="description"
-                    multiline
-                    rows={5}
-                  />
-
-                  <Button
-                    size="large"
-                    type="submit"
-                    variant="contained"
-                    sx={{ backgroundColor: "blue", color: "white" }}
-                  >
-                    Ändern
-                  </Button>
-                </Box>
-              </form>
+              <Button
+                size="medium"
+                variant="contained"
+                onClick={handleOpenChange}
+                sx={{
+                  backgroundColor: "blue",
+                  color: "white",
+                  fontSize: { xs: "13px", md: " 14px", lg: "13px" },
+                }}
+              >
+                Tutorial ändern
+              </Button>
+              <Button
+                size="medium"
+                variant="contained"
+                onClick={() => {
+                  dispatch(deleteTutorial(_id));
+                }}
+                sx={{
+                  backgroundColor: "red",
+                  color: "white",
+                  fontSize: { xs: "13px", md: " 14px", lg: "13px" },
+                }}
+              >
+                Tutorial löschen
+              </Button>
             </Box>
-          </Modal>
+            <Modal open={openChange} onClose={handleCloseChange}>
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: { xs: "370px", md: "450px", lg: "550px" },
+                  bgcolor: "background.paper",
+                  border: "1px solid #000",
+                  borderRadius: "5px",
+                  boxShadow: 24,
+                  p: 4,
+                }}
+              >
+                <form onSubmit={handleSubmit} autoComplete="off">
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: "30px",
+                    }}
+                  >
+                    <Typography variant="h5" component="h2">
+                      Ändern Sie das Tutorial
+                    </Typography>
+
+                    <TextField
+                      sx={{ width: "300px" }}
+                      name="category"
+                      select
+                      required
+                      value={stateCategory || category.name || categoryToFind}
+                      onChange={handleChange}
+                      variant="outlined"
+                      label="Kategorie"
+                    >
+                      {categories?.map((category) => (
+                        <MenuItem
+                          key={category._id}
+                          id={category._id}
+                          value={category.name}
+                        >
+                          {category.name}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                    <TextField
+                      fullWidth
+                      required
+                      defaultValue={title}
+                      label="Titel"
+                      name="title"
+                    />
+
+                    <TextField
+                      fullWidth
+                      required
+                      defaultValue={videoUrl}
+                      label="YouTube-Link"
+                      name="videoUrl"
+                    />
+
+                    <TextField
+                      fullWidth
+                      required
+                      defaultValue={description}
+                      label="Beschreibung"
+                      name="description"
+                      multiline
+                      rows={5}
+                    />
+
+                    <Button
+                      size="large"
+                      type="submit"
+                      variant="contained"
+                      sx={{ backgroundColor: "blue", color: "white" }}
+                    >
+                      Ändern
+                    </Button>
+                  </Box>
+                </form>
+              </Box>
+            </Modal>
+          </Box>
         </Paper>
       </Grid>
     </li>

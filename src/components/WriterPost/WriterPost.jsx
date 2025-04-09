@@ -96,7 +96,16 @@ const WriterPost = ({ _id, title, imageUrl, content, author }) => {
             <Typography variant="h5" component="h2" textOverflow="ellipsis">
               {title}
             </Typography>
-            <Typography variant="body2" component="p">
+            <Typography
+              variant="body2"
+              component="p"
+              sx={{
+                wordWrap: "break-word",
+                overflowWrap: "break-word",
+                overflow: "hidden",
+                width: { xs: 330, md: 380, lg: 330 },
+              }}
+            >
               {content}
             </Typography>
           </Box>

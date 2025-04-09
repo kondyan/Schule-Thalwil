@@ -11,8 +11,11 @@ import {
 } from "@mui/material";
 import PasswordIcon from "@mui/icons-material/Password";
 import { Link } from "react-router";
+import { toast } from "sonner";
+import { useState } from "react";
 
 const LoginForm = () => {
+  const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -27,12 +30,14 @@ const LoginForm = () => {
     )
       .unwrap()
       .then(() => {
-        console.log("login success");
+        toast.success("Login erfolgreich! Willkommen zurück.");
       })
       .catch(() => {
-        console.log("login error");
+        toast.error(
+          "Anmeldung fehlgeschlagen. Bitte prüfen Sie Benutzername und Passwort."
+        );
+        setIsError(true);
       });
-    //   заменить на MUI уведомления
   };
 
   return (
@@ -87,32 +92,68 @@ const LoginForm = () => {
               gap: { xs: "20px", md: "30px", lg: "40px" },
             }}
           >
-            <TextField
-              sx={{
-                scale: { xs: "1", md: "1.2", lg: "1.4" },
-              }}
-              fullWidth
-              required
-              variant="standard"
-              label="E-mail"
-              type="email"
-              name="email"
-              placeholder="E-mail"
-            />
+            {!isError && (
+              <TextField
+                sx={{
+                  scale: { xs: "1", md: "1.2", lg: "1.4" },
+                }}
+                fullWidth
+                required
+                variant="standard"
+                label="E-mail"
+                type="email"
+                name="email"
+                placeholder="E-mail"
+              />
+            )}
+            {isError && (
+              <TextField
+                sx={{
+                  scale: { xs: "1", md: "1.2", lg: "1.4" },
+                }}
+                error
+                fullWidth
+                required
+                variant="standard"
+                label="E-mail"
+                type="email"
+                name="email"
+                placeholder="E-mail"
+              />
+            )}
 
-            <TextField
-              sx={{
-                scale: { xs: "1", md: "1.2", lg: "1.4" },
-              }}
-              color="primary"
-              fullWidth
-              required
-              variant="standard"
-              label="Passwort"
-              type="password"
-              name="password"
-              placeholder="Passwort"
-            />
+            {!isError && (
+              <TextField
+                sx={{
+                  scale: { xs: "1", md: "1.2", lg: "1.4" },
+                }}
+                color="primary"
+                fullWidth
+                required
+                variant="standard"
+                label="Passwort"
+                type="password"
+                name="password"
+                placeholder="Passwort"
+              />
+            )}
+
+            {isError && (
+              <TextField
+                sx={{
+                  scale: { xs: "1", md: "1.2", lg: "1.4" },
+                }}
+                error
+                color="primary"
+                fullWidth
+                required
+                variant="standard"
+                label="Passwort"
+                type="password"
+                name="password"
+                placeholder="Passwort"
+              />
+            )}
 
             <Button
               sx={{

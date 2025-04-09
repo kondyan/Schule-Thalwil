@@ -12,6 +12,7 @@ import { selectPostsByUserId } from "../../redux/auth/selectors";
 import Grid from "@mui/material/Grid2";
 import WriterPost from "../WriterPost/WriterPost";
 import { clearPreviewImage } from "../../redux/articles/slice";
+import { toast } from "sonner";
 
 const WriterPosts = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,17 @@ const WriterPosts = () => {
     const content = form.elements.content.value;
     const imageUrl = form.elements.imageUrl.nextSibling.firstChild.currentSrc;
 
-    dispatch(createPost({ title, imageUrl, content }));
+    dispatch(createPost({ title, imageUrl, content }))
+      .unwrap()
+      .then(() => {
+        toast.success("Artikel ist erfolgreich erstellt!");
+      })
+      .catch(() => {
+        toast.error(
+          "Erstellung fehlgeschlagen. Bitte prüfen Sie Anzahl von Zeichen"
+        );
+        setIsError(true);
+      });
   };
 
   useEffect(() => {
@@ -108,7 +119,13 @@ const WriterPosts = () => {
               <Typography variant="h5" component="h2">
                 Erstellen Sie einen Artikel
               </Typography>
-              <TextField fullWidth required label="Titel" name="title" />
+              <TextField
+                fullWidth
+                required
+                label="Titel"
+                name="title"
+                placeholder="Max. 27 Zeichen"
+              />
 
               <Button
                 disableRipple
@@ -181,6 +198,7 @@ const WriterPosts = () => {
                 label="Beschreibung"
                 name="content"
                 multiline
+                placeholder="Mind. 40 Zeichen"
                 rows={5}
               />
 

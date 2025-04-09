@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  changeTutorial,
   createCategory,
   deleteCategory,
   getCategories,
@@ -24,7 +25,11 @@ const slice = createSlice({
     isRefreshing: false,
     error: undefined,
   },
-
+  reducers: {
+    clearActiveCategory(state) {
+      state.activeCategory = undefined;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCategories.fulfilled, (state, action) => {
@@ -40,7 +45,7 @@ const slice = createSlice({
         state.error = action.payload;
       })
       .addCase(getTutorials.fulfilled, (state, action) => {
-        state.tutorials = action.payload.data;
+        state.tutorials = action.payload.data.reverse();
         state.activeCategory = action.payload.activeCategory;
         state.isRefreshing = false;
         state.error = undefined;
@@ -77,8 +82,13 @@ const slice = createSlice({
       .addCase(createCategory.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
+      })
+      .addCase(changeTutorial.fulfilled, (state, action) => {
+        state.activeCategory = action.payload.category;
+        state.isRefreshing = false;
+        state.error = undefined;
       });
   },
 });
-
+export const { clearActiveCategory } = slice.actions;
 export default slice.reducer;

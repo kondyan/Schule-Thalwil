@@ -25,7 +25,7 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getPosts.fulfilled, (state, action) => {
-        state.data = action.payload.data;
+        state.data = action.payload.data.reverse();
         state.currentPage = action.payload.currentPage;
         state.totalPages = action.payload.totalPages;
         state.isRefreshing = false;

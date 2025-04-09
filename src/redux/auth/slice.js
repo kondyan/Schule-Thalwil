@@ -122,13 +122,13 @@ const slice = createSlice({
       })
 
       .addCase(getPostsByUserId.fulfilled, (state, action) => {
-        state.posts = action.payload;
+        state.posts = action.payload.reverse();
         state.isRefreshing = false;
         state.error = undefined;
       })
 
       .addCase(getTutorialsByUserId.fulfilled, (state, action) => {
-        state.tutorials = action.payload;
+        state.tutorials = action.payload.reverse();
         state.isRefreshing = false;
         state.error = undefined;
       })
@@ -142,7 +142,7 @@ const slice = createSlice({
       })
 
       .addCase(createPost.fulfilled, (state, action) => {
-        state.posts.push(action.payload);
+        state.posts.unshift(action.payload);
         state.isRefreshing = false;
         state.error = undefined;
       })
@@ -177,7 +177,7 @@ const slice = createSlice({
       })
 
       .addCase(createTutorial.fulfilled, (state, action) => {
-        state.tutorials.push(action.payload);
+        state.tutorials.unshift(action.payload);
         state.isRefreshing = false;
         state.error = undefined;
       })
