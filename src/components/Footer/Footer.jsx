@@ -1,4 +1,7 @@
 import { Avatar, Box, Link, Typography } from "@mui/material";
+import reactIcon from "../../../react.svg";
+import schuleIcon from "../../../favicon.svg";
+import viteIcon from "../../../vite.svg";
 
 const Footer = () => {
   return (
@@ -60,7 +63,7 @@ const Footer = () => {
               rel="noreferrer"
             >
               <Avatar
-                src="../../favicon-96x96.png"
+                src={schuleIcon}
                 alt="Schule Thalwil"
                 variant="circular"
                 sx={{
@@ -72,7 +75,7 @@ const Footer = () => {
           <li>
             <Link href="https://react.dev/" target="_blank" rel="noreferrer">
               <Avatar
-                src="../../react.svg"
+                src={reactIcon}
                 alt="React"
                 variant="circular"
                 sx={{
@@ -84,7 +87,7 @@ const Footer = () => {
           <li>
             <Link href="https://vite.dev/" target="_blank" rel="noreferrer">
               <Avatar
-                src="../../vite.svg"
+                src={viteIcon}
                 alt="Vite"
                 variant="rounded"
                 sx={{
