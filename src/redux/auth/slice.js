@@ -69,7 +69,6 @@ const slice = createSlice({
       })
 
       .addCase(refreshUser.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
