@@ -73,7 +73,7 @@ export const getTutorialsByUserId = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const id = state.auth.user.id;
+      const id = state.auth.user._id;
 
       const response = await axios.get(`/tutorials/authors/${id}`);
       return response.data;

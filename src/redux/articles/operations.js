@@ -34,7 +34,7 @@ export const getPostsByUserId = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const id = state.auth.user.id;
+      const id = state.auth.user._id;
 
       const response = await axios.get(`/posts/authors/${id}`);
 

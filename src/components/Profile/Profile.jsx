@@ -5,6 +5,7 @@ import css from "./Profile.module.css";
 import { useRef, useState } from "react";
 import { updateAvatar, updateUserData } from "../../redux/auth/operations";
 import image from "../../imgs/avatar.png";
+import { toast } from "sonner";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,14 @@ const Profile = () => {
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      dispatch(updateAvatar(file));
+      dispatch(updateAvatar(file))
+        .unwrap()
+        .then(() => {
+          toast.success("Profilbild wurde erfolgreich geändert!");
+        })
+        .catch(() => {
+          toast.error("Änderung fehlgeschlagen. Bitte probieren Sie nochmal");
+        });
     }
   };
 
@@ -36,12 +44,11 @@ const Profile = () => {
     )
       .unwrap()
       .then(() => {
-        console.log("update success");
+        toast.success("Data wurde erfolgreich geändert!");
       })
       .catch(() => {
-        console.log("update error");
+        toast.error("Änderung fehlgeschlagen. Bitte probieren Sie nochmal");
       });
-    //   заменить на MUI уведомления
   };
 
   return (
@@ -77,7 +84,7 @@ const Profile = () => {
           sx={{ color: "white" }}
           size="large"
         >
-          Profilbild wächseln
+          Profilbild ändern
           <input
             type="file"
             id="file-input"
@@ -147,7 +154,7 @@ const Profile = () => {
               type="password"
               name="password"
               label="Neues Passwort"
-              placeholder="*********"
+              placeholder="Mind. 8 Zeichen"
               sx={{ width: { xs: "280px", md: "400px", lg: "550px" } }}
             >
               Passwort
@@ -163,7 +170,7 @@ const Profile = () => {
             variant="contained"
             type="submit"
           >
-            Data wächseln
+            Data ändern
           </Button>
         </Box>
       </form>
