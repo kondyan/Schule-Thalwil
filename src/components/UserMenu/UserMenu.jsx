@@ -98,10 +98,10 @@ const UserMenu = () => {
             </Button>
           </NavLink>
         )}
-        {userRoles?.includes("admin") && (
+        {userRoles?.includes("moderator") && (
           <NavLink to="/categories">
             <Button
-              key="admin"
+              key="moderator"
               sx={{
                 color: "black",
                 display: "block",

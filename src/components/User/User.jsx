@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid2";
 import { useDispatch } from "react-redux";
 import { setUserRole } from "../../redux/auth/operations";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const User = (data) => {
   const { _id, username, name, secondName, email, avatar, role } = data.data;
@@ -41,7 +42,15 @@ const User = (data) => {
         _id,
         data: { username, name, secondName, role },
       })
-    );
+    )
+      .unwrap()
+      .then(() => {
+        toast.success("Die Rechte des Users wurden erfolgreich geändert!");
+      })
+      .catch(() => {
+        toast.error("Änderung fehlgeschlagen. Bitte probieren Sie nochmal");
+        setIsError(true);
+      });
   };
   return (
     <li>
@@ -52,8 +61,8 @@ const User = (data) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "8px",
-            p: { xs: "7px", md: "13px", lg: "16px" },
+            gap: "7px",
+            p: { xs: "10px", md: "13px", lg: "15px" },
           }}
         >
           <Box
@@ -78,7 +87,6 @@ const User = (data) => {
 
           <form onSubmit={handleSubmit}>
             <Box
-              paddingX={1.5}
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -93,7 +101,7 @@ const User = (data) => {
                   control={<Checkbox />}
                   checked={writer}
                   onChange={() => setWriter((prev) => !prev)}
-                  label="Writer"
+                  label="Schreiber"
                   name="writer"
                 />
                 <FormControlLabel

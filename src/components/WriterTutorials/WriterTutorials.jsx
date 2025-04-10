@@ -14,7 +14,10 @@ import {
   getTutorialsByUserId,
 } from "../../redux/categories/operations";
 import { selectTutorialsByUserId } from "../../redux/auth/selectors";
-import { selectCategories } from "../../redux/categories/selectors";
+import {
+  selectActiveCategory,
+  selectCategories,
+} from "../../redux/categories/selectors";
 import WriterTutorial from "../WriterTutorial/WriterTutorial";
 import Grid from "@mui/material/Grid2";
 import { toast } from "sonner";
@@ -24,6 +27,7 @@ const WriterTutorials = () => {
   const [category, setCategory] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const handleOpenCreate = () => setOpenCreate(true);
+  const activeCategory = useSelector(selectActiveCategory);
 
   const handleCloseCreate = () => {
     setCategory("");
@@ -45,22 +49,20 @@ const WriterTutorials = () => {
 
     handleCloseCreate();
 
+    const category = categoryId;
     const title = form.elements.title.value;
     const videoUrl = form.elements.videoUrl.value;
     const description = form.elements.description.value;
 
-    dispatch(
-      createTutorial({ category: categoryId, title, videoUrl, description })
-    )
+    dispatch(createTutorial({ category, title, videoUrl, description }))
       .unwrap()
       .then(() => {
-        toast.success("Tutorial ist erfolgreich erstellt!");
+        toast.success("Tutorial wurde erfolgreich erstellt!");
       })
       .catch(() => {
         toast.error(
           "Erstellung fehlgeschlagen. Bitte prüfen Sie Anzahl von Zeichen"
         );
-        setIsError(true);
       });
   };
 
@@ -196,6 +198,7 @@ const WriterTutorials = () => {
               videoUrl={tutorial.videoUrl}
               description={tutorial.description}
               author={tutorial.author}
+              activeCategoryT={activeCategory}
             />
           ))}
         </Grid>

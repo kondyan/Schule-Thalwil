@@ -56,7 +56,7 @@ const WriterPosts = () => {
     dispatch(createPost({ title, imageUrl, content }))
       .unwrap()
       .then(() => {
-        toast.success("Artikel ist erfolgreich erstellt!");
+        toast.success("Artikel wurde erfolgreich erstellt!");
       })
       .catch(() => {
         toast.error(

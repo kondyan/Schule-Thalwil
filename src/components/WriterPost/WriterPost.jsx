@@ -25,6 +25,7 @@ import {
   selectPreviewImage,
 } from "../../redux/articles/selectors";
 import { clearPreviewImage } from "../../redux/articles/slice";
+import { toast } from "sonner";
 
 const WriterPost = ({ _id, title, imageUrl, content, author }) => {
   const dispatch = useDispatch();
@@ -64,7 +65,16 @@ const WriterPost = ({ _id, title, imageUrl, content, author }) => {
       ? form.elements.imageUrl.nextSibling.firstChild.currentSrc
       : imageUrl;
 
-    dispatch(changePost({ _id, data: { title, imageUrl, content } }));
+    dispatch(changePost({ _id, data: { title, imageUrl, content } }))
+      .unwrap()
+      .then(() => {
+        toast.success("Artikel wurde erfolgreich geändert!");
+      })
+      .catch(() => {
+        toast.error(
+          "Änderung fehlgeschlagen. Bitte prüfen Sie Anzahl von Zeichen"
+        );
+      });
   };
 
   return (
@@ -140,7 +150,16 @@ const WriterPost = ({ _id, title, imageUrl, content, author }) => {
                 size="medium"
                 variant="contained"
                 onClick={() => {
-                  dispatch(deletePost(_id));
+                  dispatch(deletePost(_id))
+                    .unwrap()
+                    .then(() => {
+                      toast.success("Artikel wurde erfolgreich gelöscht!");
+                    })
+                    .catch(() => {
+                      toast.error(
+                        "Löschen fehlgeschlagen. Bitte probieren Sie nochmal"
+                      );
+                    });
                 }}
                 sx={{ backgroundColor: "red", color: "white" }}
               >
@@ -179,6 +198,7 @@ const WriterPost = ({ _id, title, imageUrl, content, author }) => {
                       required
                       label="Titel"
                       name="title"
+                      placeholder="Max. 27 Zeichen"
                       defaultValue={title}
                     />
 
@@ -257,6 +277,7 @@ const WriterPost = ({ _id, title, imageUrl, content, author }) => {
                       name="content"
                       multiline
                       rows={5}
+                      placeholder="Mind. 40 Zeichen"
                       defaultValue={content}
                     />
 

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   changeTutorial,
   createCategory,
+  createTutorial,
   deleteCategory,
   getCategories,
   getTutorials,
@@ -82,6 +83,11 @@ const slice = createSlice({
       .addCase(createCategory.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
+      })
+      .addCase(createTutorial.fulfilled, (state, action) => {
+        state.activeCategory = action.payload.category;
+        state.isRefreshing = false;
+        state.error = undefined;
       })
       .addCase(changeTutorial.fulfilled, (state, action) => {
         state.activeCategory = action.payload.category;

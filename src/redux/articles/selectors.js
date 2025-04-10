@@ -8,3 +8,7 @@ export const selectCurrentPostIsRefreshing = (state) =>
   state.posts.currentPost.isRefreshing;
 
 export const selectPreviewImage = (state) => state.posts.previewImage;
+
+export const selectTotalPages = (state) => state.posts.totalPages;
+
+export const selectCurrentPage = (state) => state.posts.currentPage;

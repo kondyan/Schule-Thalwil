@@ -20,6 +20,7 @@ import {
   selectCategories,
 } from "../../redux/categories/selectors";
 import { clearActiveCategory } from "../../redux/categories/slice";
+import { toast } from "sonner";
 
 const WriterTutorial = ({
   _id,
@@ -28,6 +29,7 @@ const WriterTutorial = ({
   videoUrl,
   description,
   author,
+  activeCategoryT,
 }) => {
   const categories = useSelector(selectCategories);
   const activeCategory = useSelector(selectActiveCategory);
@@ -35,6 +37,10 @@ const WriterTutorial = ({
     (category) => category._id === activeCategory
   );
   categoryToFind = categoryToFind?.name;
+  let categoryToFindT = categories.find(
+    (category) => category._id === activeCategoryT
+  );
+  categoryToFindT = categoryToFindT?.name;
   const [openChange, setOpenChange] = useState(false);
   const [stateCategory, setStateCategory] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -55,16 +61,16 @@ const WriterTutorial = ({
   const handleChange = (e) => {
     setStateCategory(e.target.value);
     setCategoryId(e.explicitOriginalTarget.id);
-    dispatch(clearActiveCategory());
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
 
+    dispatch(clearActiveCategory());
     handleCloseChange();
-    setStateCategory(categoryToFind);
-    setCategoryId(activeCategory);
+    setStateCategory(categoryToFind || categoryToFindT);
+    setCategoryId(activeCategory || activeCategoryT);
 
     const formTitle = form.elements.title.value;
     const formVideoUrl = form.elements.videoUrl.value;
@@ -81,11 +87,20 @@ const WriterTutorial = ({
           description: formDescription,
         },
       })
-    );
+    )
+      .unwrap()
+      .then(() => {
+        toast.success("Tutorial wurde erfolgreich geändert!");
+      })
+      .catch(() => {
+        toast.error(
+          "Änderung fehlgeschlagen. Bitte prüfen Sie Anzahl von Zeichen"
+        );
+      });
   };
   return (
     <li>
-      <Grid sx={{ xs: 12, md: 6, lg: 3 }} width={{ xs: 350, md: 400, lg: 350 }}>
+      <Grid sx={{ xs: 12, md: 6, lg: 3 }} width={{ xs: 350, md: 400, lg: 346 }}>
         <Paper
           square={false}
           elevation={6}
@@ -139,7 +154,7 @@ const WriterTutorial = ({
             <Box
               sx={{
                 display: "flex",
-                gap: { xs: "10px", md: "40px", lg: "15px" },
+                gap: { xs: "10px", md: "40px", lg: "14px" },
                 py: { xs: "5px", md: "12.5px", lg: "15px" },
                 alignItems: "center",
                 justifyContent: "center",
@@ -161,7 +176,16 @@ const WriterTutorial = ({
                 size="medium"
                 variant="contained"
                 onClick={() => {
-                  dispatch(deleteTutorial(_id));
+                  dispatch(deleteTutorial(_id))
+                    .unwrap()
+                    .then(() => {
+                      toast.success("Tutorial wurde erfolgreich gelöscht!");
+                    })
+                    .catch(() => {
+                      toast.error(
+                        "Löschen fehlgeschlagen. Bitte probieren Sie nochmal"
+                      );
+                    });
                 }}
                 sx={{
                   backgroundColor: "red",
@@ -205,7 +229,12 @@ const WriterTutorial = ({
                       name="category"
                       select
                       required
-                      value={stateCategory || category.name || categoryToFind}
+                      value={
+                        stateCategory ||
+                        category.name ||
+                        categoryToFind ||
+                        categoryToFindT
+                      }
                       onChange={handleChange}
                       variant="outlined"
                       label="Kategorie"
@@ -226,6 +255,7 @@ const WriterTutorial = ({
                       defaultValue={title}
                       label="Titel"
                       name="title"
+                      placeholder="Max. 27 Zeichen"
                     />
 
                     <TextField
@@ -244,6 +274,7 @@ const WriterTutorial = ({
                       name="description"
                       multiline
                       rows={5}
+                      placeholder="Mind. 10 Zeichen"
                     />
 
                     <Button

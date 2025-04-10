@@ -13,6 +13,17 @@ import PasswordIcon from "@mui/icons-material/Password";
 import { Link } from "react-router";
 import { toast } from "sonner";
 import { useState } from "react";
+import { object, string } from "yup";
+
+// const validationSchema = object({
+//   email: string().email().required(),
+
+//   password: string().min(
+//     8,
+//     "password",
+//     toast.error("Dein Passwort muss Mindestens 8 Zeichen enthalten")
+//   ),
+// });
 
 const LoginForm = () => {
   const [isError, setIsError] = useState(false);
@@ -34,7 +45,7 @@ const LoginForm = () => {
       })
       .catch(() => {
         toast.error(
-          "Anmeldung fehlgeschlagen. Bitte prüfen Sie Benutzername und Passwort."
+          "Anmeldung fehlgeschlagen. Bitte prüfen Sie Benutzername und Passwort"
         );
         setIsError(true);
       });
@@ -78,6 +89,7 @@ const LoginForm = () => {
         </Typography>
 
         <form
+          // validationschema={validationSchema}
           className={css.loginForm}
           onSubmit={handleSubmit}
           autoComplete="off"

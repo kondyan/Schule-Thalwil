@@ -7,6 +7,7 @@ import {
 } from "../../redux/categories/operations";
 import { selectCategories } from "../../redux/categories/selectors";
 import AdminCategory from "../AdminCategory/AdminCategory";
+import { toast } from "sonner";
 
 const AdminCategories = () => {
   const [openCreate, setOpenCreate] = useState(false);
@@ -24,7 +25,16 @@ const AdminCategories = () => {
     handleCloseCreate();
 
     const name = form.elements.category.value;
-    dispatch(createCategory({ name }));
+    dispatch(createCategory({ name }))
+      .unwrap()
+      .then(() => {
+        toast.success("Kategorie wurde erfolgreich erstellt!");
+      })
+      .catch(() => {
+        toast.error(
+          "Kategorie kann nicht erstellt werden, prüfen Sie die Anzahl von Zeichen"
+        );
+      });
   };
 
   useEffect(() => {
@@ -32,11 +42,24 @@ const AdminCategories = () => {
   }, []);
 
   return (
-    <Box>
+    <Box
+      sx={{
+        mt: { xs: "40px", md: "50px", lg: "60px" },
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
       <Button
         onClick={handleOpenCreate}
         variant="contained"
-        sx={{ backgroundColor: "green", color: "white" }}
+        size="large"
+        sx={{
+          backgroundColor: "green",
+          color: "white",
+          mb: { xs: "30px", md: "40px", lg: "50px" },
+          scale: { xs: "1", md: "1.2", lg: "1.4" },
+        }}
       >
         Kategorie erstellen
       </Button>
@@ -68,9 +91,16 @@ const AdminCategories = () => {
               <Typography variant="h6" component="div">
                 Erstelle eine Neue Fachkategorie
               </Typography>
-              <TextField required label="Kategorie Name" name="category" />
+              <TextField
+                required
+                label="Kategorie Name"
+                name="category"
+                placeholder="Max. 20 Zeichen"
+              />
               <Button
+                size="large"
                 variant="contained"
+                type="submit"
                 sx={{ backgroundColor: "green", color: "white" }}
               >
                 Erstellen
@@ -81,13 +111,23 @@ const AdminCategories = () => {
       </Modal>
 
       <ul>
-        {categories?.map((category) => (
-          <AdminCategory
-            key={category._id}
-            _id={category._id}
-            name={category.name}
-          />
-        ))}
+        <Box
+          sx={{
+            display: "flex",
+            gap: "20px",
+            justifyContent: { xs: "center", md: "flex-start" },
+            flexDirection: "row",
+            flexWrap: "wrap",
+          }}
+        >
+          {categories?.map((category) => (
+            <AdminCategory
+              key={category._id}
+              _id={category._id}
+              name={category.name}
+            />
+          ))}
+        </Box>
       </ul>
     </Box>
   );

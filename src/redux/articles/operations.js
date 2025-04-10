@@ -3,15 +3,18 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
-export const getPosts = createAsyncThunk("posts/get", async (_, thunkAPI) => {
-  try {
-    const response = await axios.get("/posts");
+export const getPosts = createAsyncThunk(
+  "posts/get",
+  async (page, thunkAPI) => {
+    try {
+      const response = await axios.get("/posts", { params: { page } });
 
-    return response.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const getPostById = createAsyncThunk(
   "posts/getPostById",

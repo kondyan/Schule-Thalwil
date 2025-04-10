@@ -89,7 +89,7 @@ const App = () => {
               <PrivateRoute
                 redirectTo="/login"
                 component={<CategoriesPage />}
-                roles={["admin"]}
+                roles={["moderator"]}
               />
             }
           />

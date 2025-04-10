@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router";
 import AppBarComponent from "./AppBar/AppBarComponent";
+import Footer from "./Footer/Footer";
 
 const Layout = () => {
   return (
@@ -10,6 +11,7 @@ const Layout = () => {
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>
+      <Footer />
     </>
   );
 };
