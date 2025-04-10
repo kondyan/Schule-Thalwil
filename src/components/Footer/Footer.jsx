@@ -60,9 +60,9 @@ const Footer = () => {
               rel="noreferrer"
             >
               <Avatar
-                src="../../favicon.svg"
+                src="../../favicon-96x96.png"
                 alt="Schule Thalwil"
-                variant="rounded"
+                variant="circular"
                 sx={{
                   scale: { xs: "1.1", md: "1.3", lg: "1.5" },
                 }}
@@ -74,7 +74,7 @@ const Footer = () => {
               <Avatar
                 src="../../react.svg"
                 alt="React"
-                variant="rounded"
+                variant="circular"
                 sx={{
                   scale: { xs: "1.1", md: "1.3", lg: "1.5" },
                 }}
