@@ -63,8 +63,9 @@ const ArticlesList = () => {
         sx={{
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
+          pl: { xs: "17.5px", md: "0px" },
           pt: { xs: "50px", md: "55px", lg: "60px" },
-          scale: { xs: "1", md: "1.2", lg: "1.4" },
         }}
       >
         <Pagination
@@ -72,8 +73,12 @@ const ArticlesList = () => {
           page={currentPage}
           variant="outlined"
           shape="rounded"
+          size="large"
           onChange={handleChange}
-          sx={{ color: "#01A2D8" }}
+          color="#01A2D8"
+          sx={{
+            scale: { xs: "1", md: "1.2", lg: "1.4" },
+          }}
         />
       </Stack>
     </>

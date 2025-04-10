@@ -154,7 +154,7 @@ const WriterTutorial = ({
             <Box
               sx={{
                 display: "flex",
-                gap: { xs: "10px", md: "40px", lg: "14px" },
+                gap: { xs: "10px", md: "30px", lg: "14px" },
                 py: { xs: "5px", md: "12.5px", lg: "15px" },
                 alignItems: "center",
                 justifyContent: "center",
@@ -167,7 +167,7 @@ const WriterTutorial = ({
                 sx={{
                   backgroundColor: "blue",
                   color: "white",
-                  fontSize: { xs: "13px", md: " 14px", lg: "13px" },
+                  fontSize: { xs: "13px", md: " 14px", lg: "12px" },
                 }}
               >
                 Tutorial ändern
@@ -190,7 +190,7 @@ const WriterTutorial = ({
                 sx={{
                   backgroundColor: "red",
                   color: "white",
-                  fontSize: { xs: "13px", md: " 14px", lg: "13px" },
+                  fontSize: { xs: "13px", md: " 14px", lg: "12px" },
                 }}
               >
                 Tutorial löschen

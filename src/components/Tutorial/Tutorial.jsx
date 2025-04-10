@@ -24,7 +24,7 @@ const Tutorial = ({ title, description, videoUrl }) => {
             }}
           >
             <Typography
-              variant="h4"
+              variant="h5"
               component="h2"
               sx={{ fontWeight: "600", mx: "auto" }}
             >
@@ -33,7 +33,7 @@ const Tutorial = ({ title, description, videoUrl }) => {
 
             <Typography
               sx={{
-                height: "72px",
+                height: "120px",
                 wordWrap: "break-word",
                 overflowWrap: "break-word",
               }}

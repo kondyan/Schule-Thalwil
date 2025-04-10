@@ -62,11 +62,11 @@ const User = (data) => {
             display: "flex",
             flexDirection: "column",
             gap: "7px",
-            p: { xs: "10px", md: "13px", lg: "15px" },
+            p: { xs: "7px", md: "13px", lg: "15px" },
           }}
         >
           <Box
-            paddingX={1.5}
+            paddingX={0.5}
             sx={{
               display: "flex",
               alignItems: "baseline",
@@ -98,21 +98,21 @@ const User = (data) => {
             >
               <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={<Checkbox size="small" />}
                   checked={writer}
                   onChange={() => setWriter((prev) => !prev)}
                   label="Schreiber"
                   name="writer"
                 />
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={<Checkbox size="small" />}
                   checked={moderator}
                   onChange={() => setModerator((prev) => !prev)}
                   label="Moderator"
                   name="moderator"
                 />
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={<Checkbox size="small" />}
                   checked={admin}
                   onChange={() => setAdmin((prev) => !prev)}
                   label="Admin"

@@ -7,7 +7,7 @@ const Writer = () => {
       <Box
         sx={{
           display: "flex",
-          gap: { xs: "20px", md: "25px", lg: "40px" },
+          gap: { xs: "20px", md: "80px", lg: "120px" },
           flexDirection: { xs: "column", md: "row" },
           justifyContent: "center",
           alignItems: "center",
@@ -19,7 +19,14 @@ const Writer = () => {
         <li>
           <NavLink to="/writer/posts">
             <Box>
-              <Button size="large" variant="contained" sx={{ color: "white" }}>
+              <Button
+                size="large"
+                variant="contained"
+                sx={{
+                  color: "white",
+                  scale: { xs: "1", md: "1.4", lg: "1.7" },
+                }}
+              >
                 Artikel
               </Button>
             </Box>
@@ -28,7 +35,14 @@ const Writer = () => {
         <li>
           <NavLink to="/writer/tutorials">
             <Box>
-              <Button size="large" variant="contained" sx={{ color: "white" }}>
+              <Button
+                size="large"
+                variant="contained"
+                sx={{
+                  color: "white",
+                  scale: { xs: "1", md: "1.4", lg: "1.7" },
+                }}
+              >
                 Tutorials
               </Button>
             </Box>

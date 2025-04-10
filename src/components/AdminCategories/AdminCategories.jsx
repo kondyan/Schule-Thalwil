@@ -71,7 +71,7 @@ const AdminCategories = () => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 400,
+            width: { xs: "340px", md: "450px", lg: "500px" },
             bgcolor: "background.paper",
             border: "1px solid #000",
             borderRadius: "5px",
@@ -88,7 +88,11 @@ const AdminCategories = () => {
                 gap: "30px",
               }}
             >
-              <Typography variant="h6" component="div">
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ fontSize: { xs: "18px", md: "24px", lg: "28px" } }}
+              >
                 Erstelle eine Neue Fachkategorie
               </Typography>
               <TextField
@@ -96,12 +100,17 @@ const AdminCategories = () => {
                 label="Kategorie Name"
                 name="category"
                 placeholder="Max. 20 Zeichen"
+                sx={{ scale: { xs: "1", md: "1.2", lg: "1.4" } }}
               />
               <Button
                 size="large"
                 variant="contained"
                 type="submit"
-                sx={{ backgroundColor: "green", color: "white" }}
+                sx={{
+                  backgroundColor: "green",
+                  color: "white",
+                  scale: { xs: "1", md: "1.2", lg: "1.3" },
+                }}
               >
                 Erstellen
               </Button>
